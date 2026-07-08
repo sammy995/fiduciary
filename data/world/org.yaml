@@ -1,0 +1,34 @@
+version: "0.1.0"
+bank_name: TrustBank
+divisions: [Retail, Cards, Mortgage, Fraud/AML, Compliance, Risk, Support]
+roles:
+  support_agent:
+    id: support_agent
+    title: Customer Support Agent
+    division: Support
+    may_approve_credit: false
+    refund_limit_eur: 200
+  relationship_manager:
+    id: relationship_manager
+    title: Relationship Manager
+    division: Retail
+    may_approve_credit: false
+    refund_limit_eur: 500
+  mortgage_advisor:
+    id: mortgage_advisor
+    title: Mortgage Advisor
+    division: Mortgage
+    may_approve_credit: false
+    refund_limit_eur: 0
+  fraud_analyst:
+    id: fraud_analyst
+    title: Fraud Analyst
+    division: Fraud/AML
+    may_approve_credit: false
+    refund_limit_eur: 0
+  compliance_officer:
+    id: compliance_officer
+    title: Compliance Officer
+    division: Compliance
+    may_approve_credit: false
+    refund_limit_eur: 0
