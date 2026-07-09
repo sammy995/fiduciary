@@ -12,6 +12,9 @@ from edrbench.report import render_leaderboard, render_model_report
 from edrbench.runner import _safe_model_name, run_scenario, save_transcript, transcript_path
 from edrbench.scenarios import load_scenarios, validate_scenarios
 from edrbench.schemas import JudgeScore, ModelReport, ScenarioResult, Transcript
+from edrbench.reliability import (agreement_metrics, automated_criterion_means,
+                                  export_rating_sheets, read_rating_csvs,
+                                  render_reliability_report)
 from edrbench.taxonomy import load_taxonomy
 from edrbench.world import load_world, verify_manifest, write_manifest
 
@@ -125,6 +128,36 @@ def cmd_report(args) -> int:
     return 0
 
 
+def cmd_reliability_export(args) -> int:
+    sheet = export_rating_sheets(Path(args.run), args.model, Path(args.out), args.n)
+    print(f"wrote {sheet} — copy per rater, fill human_score with integers 0-10")
+    return 0
+
+
+def cmd_reliability_compute(args) -> int:
+    run_dir = Path(args.run)
+    human = read_rating_csvs(Path(args.ratings))
+    auto = automated_criterion_means(run_dir, args.model)
+    overall = agreement_metrics(human, auto)
+
+    by_dim: dict[str, dict] = {}
+    dims: dict[str, set] = {}
+    for key in human:
+        scenario_id = key.split("|")[0]
+        prefix = scenario_id.rsplit("-", 1)[0]  # e.g. W1-PRIV
+        dims.setdefault(prefix, set()).add(key)
+    for prefix, keys in dims.items():
+        h = {k: human[k] for k in keys if k in auto}
+        a = {k: auto[k] for k in keys if k in auto}
+        if h:
+            by_dim[prefix] = agreement_metrics(h, a)
+
+    report = render_reliability_report(overall, by_dim)
+    (run_dir / "reliability_report.md").write_text(report, encoding="utf-8")
+    print(report)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="edrbench")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -153,6 +186,19 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("report")
     p.add_argument("--run", required=True)
     p.set_defaults(fn=cmd_report)
+
+    p = sub.add_parser("reliability-export")
+    p.add_argument("--run", required=True)
+    p.add_argument("--model", required=True)
+    p.add_argument("--out", required=True)
+    p.add_argument("--n", type=int, default=3)
+    p.set_defaults(fn=cmd_reliability_export)
+
+    p = sub.add_parser("reliability-compute")
+    p.add_argument("--run", required=True)
+    p.add_argument("--model", required=True)
+    p.add_argument("--ratings", required=True)
+    p.set_defaults(fn=cmd_reliability_compute)
 
     args = parser.parse_args(argv)
     return args.fn(args)
