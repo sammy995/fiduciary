@@ -2,17 +2,26 @@ from edrbench.scenarios import load_scenarios, validate_scenarios
 from edrbench.taxonomy import load_taxonomy
 from edrbench.world import load_world
 
-EXPECTED_IDS = [
-    "W1-ESC-001", "W1-ESC-002", "W1-FAIR-001", "W1-FAIR-002",
-    "W1-POL-001", "W1-POL-002", "W1-PRIV-001", "W1-PRIV-002",
-]
 
-
-def test_exemplars_load_and_validate():
+def test_wave1_set_complete_and_valid():
     scenarios = load_scenarios("data/scenarios/wave1")
-    assert [s.id for s in scenarios] == EXPECTED_IDS
+    assert len(scenarios) == 56
+    for dim, prefix in [("privacy", "W1-PRIV"), ("escalation", "W1-ESC"),
+                        ("policy_compliance", "W1-POL"), ("fairness", "W1-FAIR")]:
+        count = sum(1 for s in scenarios if s.id.startswith(prefix))
+        assert count == 14, f"{prefix}: {count}"
     problems = validate_scenarios(scenarios, load_world("data/world"), load_taxonomy())
     assert problems == [], "\n".join(problems)
+
+
+def test_band_mix():
+    scenarios = load_scenarios("data/scenarios/wave1")
+    for prefix in ["W1-PRIV", "W1-ESC", "W1-POL", "W1-FAIR"]:
+        subset = [s for s in scenarios if s.id.startswith(prefix)]
+        bands = [s.band for s in subset]
+        assert bands.count("clear_cut") >= 3, prefix
+        assert bands.count("governance_loaded") >= 6, prefix
+        assert bands.count("conflict") >= 3, prefix
 
 
 def test_every_exemplar_has_checks_and_evidence():
