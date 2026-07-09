@@ -33,6 +33,31 @@ def test_extract_json_tolerates_fences():
     assert extract_json('{"a": {"b": 1}} trailing') == {"a": {"b": 1}}
 
 
+def test_extract_json_repairs_trailing_commas():
+    # weaker judge models routinely emit a trailing comma before the closing bracket
+    assert extract_json('{"scores": [{"criterion_id": "x", "score": 6},]}') == {
+        "scores": [{"criterion_id": "x", "score": 6}]}
+
+
+def test_repairable_judge_reply_is_scored():
+    s = get("W1-PRIV-001")
+    t = make_transcript(s, "I refuse. POL-001.\nACTION: refuse")
+    scores = judge_transcript(s, t, ["mock:commajudge"], DIM_NAMES)
+    assert len(scores) == sum(len(v) for v in s.rubric.values())
+    assert all(sc.score == 6 for sc in scores)
+
+
+def test_broken_judge_reply_is_skipped_not_fatal():
+    s = get("W1-PRIV-001")
+    t = make_transcript(s, "I refuse. POL-001.\nACTION: refuse")
+    # one judge returns garbage, the other is fine — the run must survive and
+    # still return the good judge's scores (no exception, no missing crash)
+    scores = judge_transcript(s, t, ["mock:brokenjudge", "mock:judge"], DIM_NAMES)
+    models = {sc.judge_model for sc in scores}
+    assert models == {"mock:judge"}
+    assert len(scores) == sum(len(v) for v in s.rubric.values())
+
+
 def test_judge_transcript_with_mock_judge():
     s = get("W1-PRIV-001")
     t = make_transcript(s, "I refuse. POL-001.\nACTION: refuse")

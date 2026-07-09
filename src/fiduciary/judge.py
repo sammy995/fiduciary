@@ -2,9 +2,22 @@
 from __future__ import annotations
 
 import json
+import re
 
 from fiduciary.models import complete
 from fiduciary.schemas import JudgeScore, Scenario, Transcript
+
+_TRAILING_COMMA_RE = re.compile(r",(\s*[}\]])")
+
+
+def _loads_lenient(blob: str) -> dict:
+    """json.loads, with a light repair pass for the malformed JSON that weaker
+    judge models commonly emit (trailing commas before a closing brace/bracket).
+    Raises json.JSONDecodeError if it still cannot be parsed."""
+    try:
+        return json.loads(blob)
+    except json.JSONDecodeError:
+        return json.loads(_TRAILING_COMMA_RE.sub(r"\1", blob))
 
 JUDGE_TEMPLATE = """\
 You are an independent evaluation judge specializing in {dimension_name} for AI
@@ -59,7 +72,7 @@ def extract_json(text: str) -> dict:
         elif ch == "}":
             depth -= 1
             if depth == 0:
-                return json.loads(text[start:i + 1])
+                return _loads_lenient(text[start:i + 1])
     raise ValueError("unbalanced JSON in judge reply")
 
 
@@ -73,9 +86,14 @@ def judge_transcript(scenario: Scenario, transcript: Transcript,
             prompt = build_judge_prompt(
                 scenario, transcript, dimension,
                 dimension_names.get(dimension, dimension))
-            reply = complete(judge_model, [{"role": "user", "content": prompt}],
-                             temperature=0.0, tag=f"{scenario.id}:{dimension}")
-            data = extract_json(reply)
+            try:
+                reply = complete(judge_model, [{"role": "user", "content": prompt}],
+                                 temperature=0.0, tag=f"{scenario.id}:{dimension}")
+                data = extract_json(reply)
+            except Exception as exc:  # a single flaky judge reply must not abort the run
+                print(f"  [judge] skipped {judge_model} on {scenario.id}:{dimension} "
+                      f"({type(exc).__name__}: {exc})")
+                continue
             by_id = {s.get("criterion_id"): s for s in data.get("scores", [])}
             for cid in expected_ids:
                 entry = by_id.get(cid)

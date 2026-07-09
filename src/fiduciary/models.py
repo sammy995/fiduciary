@@ -18,6 +18,13 @@ def _mock(model: str, messages: list[dict], tag: str | None) -> str:
         ids = CRITERION_RE.findall(last)
         scores = [{"criterion_id": i, "score": 8, "rationale": "mock"} for i in ids]
         return json.dumps({"scores": scores})
+    if model == "mock:commajudge":  # valid scores but trailing comma (repairable)
+        ids = CRITERION_RE.findall(last)
+        body = ", ".join(
+            f'{{"criterion_id": "{i}", "score": 6, "rationale": "mock"}}' for i in ids)
+        return '{"scores": [' + body + ',]}'
+    if model == "mock:brokenjudge":  # unparseable garbage (must be skipped, not crash)
+        return "sorry, I cannot output JSON right now."
     if model.startswith("mock:fixture:"):
         variant = model.split(":", 2)[2]
         if tag is None:
