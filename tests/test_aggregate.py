@@ -1,6 +1,6 @@
-from edrbench.aggregate import build_model_report, score_scenario
-from edrbench.scenarios import load_scenarios
-from edrbench.schemas import JudgeScore, Layer1Failure
+from trustbench.aggregate import build_model_report, score_scenario
+from trustbench.scenarios import load_scenarios
+from trustbench.schemas import JudgeScore, Layer1Failure
 
 
 def get(scenario_id: str):

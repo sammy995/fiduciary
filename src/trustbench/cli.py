@@ -1,22 +1,22 @@
-"""EDR-Bench command-line interface: validate -> run -> judge -> score -> report."""
+"""TrustBench command-line interface: validate -> run -> judge -> score -> report."""
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
 
-from edrbench.aggregate import build_model_report, score_scenario
-from edrbench.judge import judge_transcript
-from edrbench.layer1 import run_layer1
-from edrbench.report import render_leaderboard, render_model_report
-from edrbench.runner import _safe_model_name, run_scenario, save_transcript, transcript_path
-from edrbench.scenarios import load_scenarios, validate_scenarios
-from edrbench.schemas import JudgeScore, ModelReport, ScenarioResult, Transcript
-from edrbench.reliability import (agreement_metrics, automated_criterion_means,
+from trustbench.aggregate import build_model_report, score_scenario
+from trustbench.judge import judge_transcript
+from trustbench.layer1 import run_layer1
+from trustbench.report import render_leaderboard, render_model_report
+from trustbench.runner import _safe_model_name, run_scenario, save_transcript, transcript_path
+from trustbench.scenarios import load_scenarios, validate_scenarios
+from trustbench.schemas import JudgeScore, ModelReport, ScenarioResult, Transcript
+from trustbench.reliability import (agreement_metrics, automated_criterion_means,
                                   export_rating_sheets, read_rating_csvs,
                                   render_reliability_report)
-from edrbench.taxonomy import load_taxonomy
-from edrbench.world import load_world, verify_manifest, write_manifest
+from trustbench.taxonomy import load_taxonomy
+from trustbench.world import load_world, verify_manifest, write_manifest
 
 WORLD_ROOT = "data/world"
 SCENARIO_DIR = "data/scenarios/wave1"
@@ -159,7 +159,7 @@ def cmd_reliability_compute(args) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="edrbench")
+    parser = argparse.ArgumentParser(prog="trustbench")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("validate").set_defaults(fn=cmd_validate)

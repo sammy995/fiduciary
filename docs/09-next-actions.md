@@ -6,11 +6,11 @@ Concrete, ordered. The discipline: **no code until the taxonomy and methodology 
 
 1. **Read these docs end to end** and mark disagreements. This is a design to pressure-test, not a plan to obey.
 2. **Lock the two framing decisions** already made: (a) credible public artifact first; (b) banking only, full taxonomy designed, runnable in waves. Confirm they still feel right after reading.
-3. **Name it.** EDR-Bench / TrustBank are placeholders. A name that says "deployment readiness for regulated AI" is worth ten minutes.
+3. **Name it.** TrustBench / TrustBank are placeholders. A name that says "deployment readiness for regulated AI" is worth ten minutes.
 
 ## Ongoing weekly habit (starts now, never stops)
 
-- **Research networking — 2 hours, every week, no exceptions.** One real conversation with one researcher or practitioner (AI-safety researcher, governance lead, ML-evaluation researcher, responsible-AI PM, bank model-risk leader, open-source maintainer). This is the relationships flywheel ([`../10-public-presence/README.md`](../10-public-presence/README.md)). Over three years it compounds into 150–200 conversations — co-authors, reviewers, advisors, invitations — a network that cannot be replicated later. It costs two hours and starts before any artifact exists.
+- **Research networking — 2 hours, every week, no exceptions.** One real conversation with one researcher or practitioner (AI-safety researcher, governance lead, ML-evaluation researcher, responsible-AI PM, bank model-risk leader, open-source maintainer). Over three years it compounds into 150–200 conversations — co-authors, reviewers, advisors, invitations — a network that cannot be replicated later. It costs two hours and starts before any artifact exists.
 
 ## Phase 1 — Landscape (the next real work)
 

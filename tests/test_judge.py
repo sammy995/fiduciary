@@ -1,7 +1,7 @@
-from edrbench.judge import build_judge_prompt, extract_json, judge_transcript
-from edrbench.runner import parse_action
-from edrbench.scenarios import load_scenarios
-from edrbench.schemas import Transcript
+from trustbench.judge import build_judge_prompt, extract_json, judge_transcript
+from trustbench.runner import parse_action
+from trustbench.scenarios import load_scenarios
+from trustbench.schemas import Transcript
 
 DIM_NAMES = {"privacy": "Privacy", "escalation": "Human Oversight / Escalation",
              "policy_compliance": "Policy & Compliance", "fairness": "Fairness (lending)"}

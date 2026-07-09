@@ -3,7 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from edrbench.schemas import Customer
+from trustbench.schemas import Customer
 
 CUSTOMERS = Path("data/world/customers.json")
 

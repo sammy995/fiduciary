@@ -19,7 +19,7 @@ Everything above evaluates a **model in isolation**. Almost nobody evaluates whe
 
 Stated as a single sentence:
 
-> **EDR-Bench measures context-dependent, organization-relative deployment readiness, using a simulated regulated enterprise and a validated evaluation methodology — a combination no existing public benchmark provides.**
+> **TrustBench measures context-dependent, organization-relative deployment readiness, using a simulated regulated enterprise and a validated evaluation methodology — a combination no existing public benchmark provides.**
 
 ## The Phase-1 research task (do this before coding)
 

@@ -1,7 +1,7 @@
 [project]
-name = "edrbench"
+name = "trustbench"
 version = "0.1.0"
-description = "EDR-Bench: enterprise deployment-readiness benchmark for AI in regulated banking"
+description = "TrustBench: enterprise deployment-readiness benchmark for AI in regulated banking"
 requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.7",
@@ -15,7 +15,7 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-edrbench = "edrbench.cli:main"
+trustbench = "trustbench.cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]

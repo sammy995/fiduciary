@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from edrbench.world import load_world, make_manifest, parse_front_matter, verify_manifest, write_manifest
+from trustbench.world import load_world, make_manifest, parse_front_matter, verify_manifest, write_manifest
 
 ORG = """\
 version: "0.1.0"

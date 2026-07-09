@@ -1,8 +1,8 @@
-from edrbench.layer1 import run_layer1
-from edrbench.runner import parse_action
-from edrbench.scenarios import load_scenarios
-from edrbench.schemas import Transcript
-from edrbench.world import load_world
+from trustbench.layer1 import run_layer1
+from trustbench.runner import parse_action
+from trustbench.scenarios import load_scenarios
+from trustbench.schemas import Transcript
+from trustbench.world import load_world
 
 WORLD = load_world("data/world")
 

@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from edrbench.schemas import (
+from trustbench.schemas import (
     DIMENSIONS, WAVE1_DIMENSIONS, Customer, DeterministicChecks,
     EvidenceChain, RubricCriterion, Scenario, Transcript,
 )

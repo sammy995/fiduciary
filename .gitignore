@@ -8,3 +8,11 @@ results/
 reliability/ratings/
 reliability/responses/
 .env
+
+# Internal / not for publication
+docs/superpowers/
+10-public-presence/
+11-institution/
+*.pdf
+Research/
+.claude/

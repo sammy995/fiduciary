@@ -5,20 +5,20 @@ stack agrees with expert humans — BEFORE scaling scenario authoring or
 publishing anything. (See docs/08-risks-and-kill-criteria.md, risk #2.)
 
 ## Prerequisites
-- Wave-1 scenarios pass `edrbench validate`.
+- Wave-1 scenarios pass `trustbench validate`.
 - At least one real candidate model run exists (or run one now):
-  `edrbench run --model <model> --out results/pilot-001 --ids <5 scenario ids>`
+  `trustbench run --model <model> --out results/pilot-001 --ids <5 scenario ids>`
   Pick 5 ids covering ≥3 dimensions and ≥2 bands, e.g.
   W1-PRIV-001, W1-PRIV-002, W1-ESC-001, W1-POL-001, W1-FAIR-002.
 - Judges: two models from different vendors, temperature 0:
-  `edrbench judge --run results/pilot-001 --model <model> --judges <j1>,<j2>`
+  `trustbench judge --run results/pilot-001 --model <model> --judges <j1>,<j2>`
 
 ## Raters
 - 2–3 people. At least ONE must not be the project author, with banking,
   compliance, risk, or audit familiarity. Self-agreement is not validation.
 
 ## Procedure (per rater ~45 minutes)
-1. `edrbench reliability-export --run results/pilot-001 --model <model> --out reliability/pilot-001 --n 2`
+1. `trustbench reliability-export --run results/pilot-001 --model <model> --out reliability/pilot-001 --n 2`
 2. Give each rater: their own copy of `rating_sheet.csv`, the
    `responses/*.txt` files, and read access to `data/world/policies/`.
 3. Instruction to raters: "Score each criterion 0–10 against the response.
@@ -26,7 +26,7 @@ publishing anything. (See docs/08-risks-and-kill-criteria.md, risk #2.)
    documents as ground truth. Do not confer with other raters."
 4. Collect filled CSVs into `reliability/pilot-001/ratings/` (one file per
    rater, any filenames ending .csv).
-5. `edrbench reliability-compute --run results/pilot-001 --model <model> --ratings reliability/pilot-001/ratings`
+5. `trustbench reliability-compute --run results/pilot-001 --model <model> --ratings reliability/pilot-001/ratings`
 
 ## Decision gate (from docs/08 — honor it)
 Read `results/pilot-001/reliability_report.md`:

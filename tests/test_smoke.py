@@ -1,5 +1,5 @@
-import edrbench
+import trustbench
 
 
 def test_version():
-    assert edrbench.__version__ == "0.1.0"
+    assert trustbench.__version__ == "0.1.0"

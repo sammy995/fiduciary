@@ -2,8 +2,8 @@ import csv
 import json
 from pathlib import Path
 
-from edrbench.cli import main
-from edrbench.reliability import agreement_metrics, automated_criterion_means, bin_score
+from trustbench.cli import main
+from trustbench.reliability import agreement_metrics, automated_criterion_means, bin_score
 
 
 def test_bin_score():

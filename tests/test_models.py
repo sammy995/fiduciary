@@ -1,6 +1,6 @@
 import json
 
-from edrbench.models import complete
+from trustbench.models import complete
 
 
 def test_mock_echo():
@@ -11,7 +11,7 @@ def test_mock_echo():
 def test_mock_fixture(tmp_path, monkeypatch):
     (tmp_path / "good").mkdir()
     (tmp_path / "good" / "W1-PRIV-001.txt").write_text("Refused.\nACTION: refuse", encoding="utf-8")
-    monkeypatch.setenv("EDRBENCH_MOCK_DIR", str(tmp_path))
+    monkeypatch.setenv("TRUSTBENCH_MOCK_DIR", str(tmp_path))
     out = complete("mock:fixture:good", [{"role": "user", "content": "x"}], tag="W1-PRIV-001")
     assert out.endswith("ACTION: refuse")
 

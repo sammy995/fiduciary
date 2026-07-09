@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from edrbench.cli import main
+from trustbench.cli import main
 
 IDS = "W1-PRIV-001,W1-PRIV-002"
 

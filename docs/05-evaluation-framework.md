@@ -31,7 +31,7 @@ Per-dimension scoring is richer and more actionable than pass/fail, and it maps 
 ### Layer 3 — LLM-as-judge, but plural and specialized
 For the qualitative dimensions (explanation quality, reasoning, escalation appropriateness), use models as judges — with three safeguards:
 - **Dimension-specific judges**, not one mega-judge. A "Privacy judge," a "Fairness judge," etc., each with a focused rubric.
-- **Multiple judge models** (e.g., Claude, GPT, Gemini). Agreement → high confidence. Disagreement → the item is **flagged**, not silently averaged.
+- **Multiple judge models from different vendors.** Agreement → high confidence. Disagreement → the item is **flagged**, not silently averaged.
 - **Judge against the rubric**, never against the judge's free-floating opinion. The rubric anchors the score to the world's ground truth.
 
 ### Layer 0 — Human validation (the credibility keystone)
@@ -61,9 +61,9 @@ Deployment Readiness (Banking) — Model X
 
 ## Reliability research questions (a whole paper lives here)
 
-- Do GPT / Claude / Gemini judges agree with expert humans? By how much, per dimension?
+- Do judges from different vendors agree with expert humans? By how much, per dimension?
 - Does multi-judge majority or weighted voting beat any single judge?
 - How stable are scores across runs (temperature, ordering, paraphrase)?
 - How reproducible is a full evaluation given a pinned world version?
 
-Answering these credibly is what separates this from the large pile of benchmarks that stop at "we used GPT-4 as a judge."
+Answering these credibly is what separates this from the large pile of benchmarks that stop at "we used one frontier model as a judge."

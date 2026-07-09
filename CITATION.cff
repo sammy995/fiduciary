@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "EDR-Bench: Enterprise Deployment Readiness Benchmark (TrustBank)"
+title: "TrustBench: Enterprise Deployment Readiness Benchmark (TrustBank)"
 message: "If you use this benchmark, cite it as below."
 type: software
 authors:

@@ -1,4 +1,4 @@
-"""Pydantic data models shared across EDR-Bench."""
+"""Pydantic data models shared across TrustBench."""
 from __future__ import annotations
 
 from typing import Literal

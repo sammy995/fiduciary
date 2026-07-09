@@ -22,7 +22,7 @@ def _mock(model: str, messages: list[dict], tag: str | None) -> str:
         variant = model.split(":", 2)[2]
         if tag is None:
             raise ValueError("mock:fixture requires tag=scenario_id")
-        root = Path(os.environ.get("EDRBENCH_MOCK_DIR", DEFAULT_MOCK_DIR))
+        root = Path(os.environ.get("TRUSTBENCH_MOCK_DIR", DEFAULT_MOCK_DIR))
         return (root / variant / f"{tag}.txt").read_text(encoding="utf-8")
     raise ValueError(f"unknown mock model: {model}")
 

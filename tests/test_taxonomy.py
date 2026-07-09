@@ -1,5 +1,5 @@
-from edrbench.schemas import WAVE1_DIMENSIONS
-from edrbench.taxonomy import control_index, load_taxonomy
+from trustbench.schemas import WAVE1_DIMENSIONS
+from trustbench.taxonomy import control_index, load_taxonomy
 
 
 def test_loads_13_dimensions():
