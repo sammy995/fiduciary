@@ -7,6 +7,7 @@ venv/
 results/
 reliability/ratings/
 reliability/responses/
+reliability/pilot-*/
 .env
 
 # Internal / not for publication
