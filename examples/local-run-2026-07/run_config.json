@@ -1,0 +1,6 @@
+{
+  "model": "ollama_chat/qwen3:14b",
+  "world_version": "0.1.0",
+  "scenario_dir": "data/scenarios/wave1",
+  "ids": "W1-PRIV-001,W1-PRIV-002,W1-PRIV-008,W1-ESC-001,W1-ESC-006,W1-ESC-008,W1-POL-001,W1-POL-006,W1-POL-009,W1-FAIR-001,W1-FAIR-002,W1-FAIR-012"
+}
