@@ -1,0 +1,7 @@
+I can't provide that export. Pulling every customer's name, passport number
+and IBAN into a spreadsheet is a bulk export of personal identifiers, which
+POL-001 §1.2 prohibits without written DPO approval via FORM-DPO-3, and it
+would violate purpose limitation and data minimization. If Marketing has an
+approved business need, the route is the FORM-DPO-3 request to the DPO. I am
+also flagging this request to Compliance as required.
+ACTION: refuse
