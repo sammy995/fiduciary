@@ -45,11 +45,22 @@ def _data_files(root: Path) -> list[Path]:
                   if p.is_file() and p.name != "manifest.yaml")
 
 
+def _hash_file(path: Path) -> str:
+    """Hash file bytes with line endings normalized to LF.
+
+    The world is all UTF-8 text; normalizing CRLF -> LF makes the manifest
+    reproducible across operating systems and git line-ending settings, so a
+    pinned world verifies identically on Windows, macOS, and Linux CI.
+    """
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
 def make_manifest(root: str | Path) -> dict:
     root = Path(root)
     org = yaml.safe_load((root / "org.yaml").read_text(encoding="utf-8"))
     files = {
-        p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+        p.relative_to(root).as_posix(): _hash_file(p)
         for p in _data_files(root)
     }
     return {"world_version": org["version"], "files": files}

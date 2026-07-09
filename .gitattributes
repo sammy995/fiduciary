@@ -1,0 +1,7 @@
+# Normalize all text to LF in the repository and working tree.
+# The TrustBank world is pinned by a sha256 manifest; consistent line endings
+# keep that manifest reproducible across Windows, macOS, and Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
