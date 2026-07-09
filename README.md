@@ -58,11 +58,13 @@ The moat is domain depth. Anyone can generate 1,000 prompts. Very few people can
 | [`docs/07-trust-and-standardization.md`](docs/07-trust-and-standardization.md) | How a benchmark becomes trusted (and why marketing isn't in that equation) |
 | [`docs/08-risks-and-kill-criteria.md`](docs/08-risks-and-kill-criteria.md) | The hard parts, failure modes, and explicit kill/pivot triggers |
 | [`docs/09-next-actions.md`](docs/09-next-actions.md) | Concrete next steps, in order |
+| [`REPRODUCING.md`](REPRODUCING.md) | Exact steps to reproduce any published run |
+| [`research/landscape.csv`](research/landscape.csv) | Phase-1 benchmark landscape (44 rows) |
 | [`10-public-presence/`](10-public-presence/README.md) | Parallel workstream: the five flywheels and the research→peer-review→content engine — **staged and gated on the artifact, not before it** |
 | [`11-institution/`](11-institution/README.md) | The long-arc institution layer (advisory board, governance, standardization, commercial) — **a deliberately empty gated stub until a proven, adopted artifact exists** |
 
 ## Status
 
-**Design phase. No code yet — deliberately.** The intellectual contribution (taxonomy + evaluation methodology) is written down before any implementation, because that is what earns citation and trust. Building starts only after the design is reviewed.
+**Build phase.** The design (below) is implemented as a runnable benchmark: taxonomy (`data/taxonomy.yaml`), TrustBank world (`data/world/`), Wave-1 scenarios (`data/scenarios/wave1/`), and the layered evaluation harness (`src/edrbench/`). See [`REPRODUCING.md`](REPRODUCING.md) to run it. Reliability numbers gate any public leaderboard claims — see [`reliability/PILOT-RUNBOOK.md`](reliability/PILOT-RUNBOOK.md).
 
 **Working name:** EDR-Bench / TrustBank. Both are provisional — rename freely.
