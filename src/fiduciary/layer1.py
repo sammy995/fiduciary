@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import re
 
-from trustbench.schemas import Layer1Failure, Scenario, Transcript, World
+from fiduciary.schemas import Layer1Failure, Scenario, Transcript, World
 
 POLICY_ID_RE = re.compile(r"POL-\d{3}")
 

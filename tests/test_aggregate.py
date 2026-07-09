@@ -1,6 +1,6 @@
-from trustbench.aggregate import build_model_report, score_scenario
-from trustbench.scenarios import load_scenarios
-from trustbench.schemas import JudgeScore, Layer1Failure
+from fiduciary.aggregate import build_model_report, score_scenario
+from fiduciary.scenarios import load_scenarios
+from fiduciary.schemas import JudgeScore, Layer1Failure
 
 
 def get(scenario_id: str):

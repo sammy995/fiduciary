@@ -1,0 +1,117 @@
+% Fiduciary — reference library.
+% Frameworks are the source of ground truth for "correct behavior"; the
+% eval-reliability entries are the methodological backbone. Populate DOIs/URLs
+% and add rows as the landscape review (research/landscape.csv) proceeds.
+
+% ---------------------------------------------------------------------------
+% Governance & risk frameworks (ground truth for controls)
+% ---------------------------------------------------------------------------
+
+@misc{gdpr2016,
+  title        = {Regulation (EU) 2016/679 (General Data Protection Regulation)},
+  author       = {{European Parliament and Council}},
+  year         = {2016},
+  howpublished = {Official Journal of the European Union L119},
+  url          = {https://eur-lex.europa.eu/eli/reg/2016/679/oj}
+}
+
+@misc{euaiact2024,
+  title        = {Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (AI Act)},
+  author       = {{European Parliament and Council}},
+  year         = {2024},
+  url          = {https://eur-lex.europa.eu/eli/reg/2024/1689/oj}
+}
+
+@techreport{sr117,
+  title       = {SR 11-7: Guidance on Model Risk Management},
+  author      = {{Board of Governors of the Federal Reserve System and OCC}},
+  institution = {Federal Reserve},
+  year        = {2011}
+}
+
+@techreport{nistairmf2023,
+  title       = {Artificial Intelligence Risk Management Framework (AI RMF 1.0)},
+  author      = {{National Institute of Standards and Technology}},
+  institution = {NIST},
+  number      = {NIST AI 100-1},
+  year        = {2023}
+}
+
+@misc{owaspllm2025,
+  title        = {OWASP Top 10 for Large Language Model Applications},
+  author       = {{OWASP Foundation}},
+  year         = {2025},
+  url          = {https://owasp.org/www-project-top-10-for-large-language-model-applications/}
+}
+
+@misc{isoiec42001,
+  title  = {ISO/IEC 42001: Information technology --- Artificial intelligence --- Management system},
+  author = {{ISO/IEC}},
+  year   = {2023}
+}
+
+% ---------------------------------------------------------------------------
+% Evaluation & judge-reliability methodology (the backbone)
+% ---------------------------------------------------------------------------
+
+@article{cohen1960kappa,
+  title   = {A Coefficient of Agreement for Nominal Scales},
+  author  = {Cohen, Jacob},
+  journal = {Educational and Psychological Measurement},
+  volume  = {20},
+  number  = {1},
+  pages   = {37--46},
+  year    = {1960}
+}
+
+@article{krippendorff2004alpha,
+  title   = {Reliability in Content Analysis: Some Common Misconceptions and Recommendations},
+  author  = {Krippendorff, Klaus},
+  journal = {Human Communication Research},
+  volume  = {30},
+  number  = {3},
+  pages   = {411--433},
+  year    = {2004}
+}
+
+@article{landis1977koch,
+  title   = {The Measurement of Observer Agreement for Categorical Data},
+  author  = {Landis, J. Richard and Koch, Gary G.},
+  journal = {Biometrics},
+  volume  = {33},
+  number  = {1},
+  pages   = {159--174},
+  year    = {1977}
+}
+
+% ---------------------------------------------------------------------------
+% Documentation & transparency norms (borrowed practice)
+% ---------------------------------------------------------------------------
+
+@inproceedings{mitchell2019modelcards,
+  title     = {Model Cards for Model Reporting},
+  author    = {Mitchell, Margaret and others},
+  booktitle = {Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT*)},
+  year      = {2019}
+}
+
+@article{gebru2021datasheets,
+  title   = {Datasheets for Datasets},
+  author  = {Gebru, Timnit and others},
+  journal = {Communications of the ACM},
+  volume  = {64},
+  number  = {12},
+  year    = {2021}
+}
+
+% ---------------------------------------------------------------------------
+% This project
+% ---------------------------------------------------------------------------
+
+@software{fiduciary2026,
+  title   = {Fiduciary: an enterprise deployment-readiness benchmark for AI in regulated banking},
+  author  = {Lagad, Shubham},
+  year    = {2026},
+  version = {0.1.0},
+  url     = {https://github.com/sammy995/fiduciary}
+}

@@ -1,6 +1,6 @@
-# Contributing to TrustBench
+# Contributing to Fiduciary
 
-Thanks for helping build a benchmark serious institutions can trust. TrustBench
+Thanks for helping build a benchmark serious institutions can trust. Fiduciary
 is a **social system disguised as a technical system** — its value comes from
 transparency, reproducibility, and domain rigor. Contributions are judged
 against that bar.
@@ -14,7 +14,7 @@ model into a role inside TrustBank and defines what good behavior looks like.
 ### Anatomy of a scenario
 
 Every scenario lives in [`data/scenarios/wave1/<id>.yaml`](data/scenarios/wave1/)
-and must satisfy `trustbench validate`. Use an existing exemplar
+and must satisfy `fiduciary validate`. Use an existing exemplar
 (`W1-PRIV-001`, `W1-ESC-002`, `W1-FAIR-002`) as your template. Hard rules:
 
 1. **Filename equals `id`** (`W1-<DIM>-NNN.yaml`), `DIM ∈ PRIV, ESC, POL, FAIR`.
@@ -30,7 +30,7 @@ and must satisfy `trustbench validate`. Use an existing exemplar
 7. Set `required_action` (`answer` / `escalate` / `refuse`) so Layer 1 can score
    it deterministically.
 
-Run `trustbench validate` — a green "OK" is required before you open a PR.
+Run `fiduciary validate` — a green "OK" is required before you open a PR.
 
 ## Development setup
 
@@ -38,14 +38,14 @@ Run `trustbench validate` — a green "OK" is required before you open a PR.
 python -m venv .venv && source .venv/bin/activate    # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 python -m pytest        # must be green (offline, no API keys)
-trustbench validate     # world + taxonomy + scenarios + manifest
+fiduciary validate     # world + taxonomy + scenarios + manifest
 ```
 
 If you change anything under `data/world/`, regenerate the manifest and commit
 it (a pinned world is what makes results reproducible):
 
 ```bash
-python -c "from trustbench.world import write_manifest; write_manifest('data/world')"
+python -c "from fiduciary.world import write_manifest; write_manifest('data/world')"
 ```
 
 ## Code contributions
@@ -54,7 +54,7 @@ python -c "from trustbench.world import write_manifest; write_manifest('data/wor
   suite offline.
 - Keep new files focused and match the surrounding style. No new heavy runtime
   dependencies without discussion.
-- Model calls go through `trustbench.models.complete`; keep all tests runnable
+- Model calls go through `fiduciary.models.complete`; keep all tests runnable
   with the `mock:` protocol (no network in CI).
 
 ## Judge & methodology changes
@@ -67,7 +67,7 @@ Prefer moving checks *into* Layer 1 (deterministic) over widening LLM judgment.
 ## Pull requests
 
 1. Branch from `main`.
-2. `python -m pytest` and `trustbench validate` both green.
+2. `python -m pytest` and `fiduciary validate` both green.
 3. Describe *what deployment concern* your change measures or improves.
 4. One logical change per PR.
 

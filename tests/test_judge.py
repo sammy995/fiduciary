@@ -1,7 +1,7 @@
-from trustbench.judge import build_judge_prompt, extract_json, judge_transcript
-from trustbench.runner import parse_action
-from trustbench.scenarios import load_scenarios
-from trustbench.schemas import Transcript
+from fiduciary.judge import build_judge_prompt, extract_json, judge_transcript
+from fiduciary.runner import parse_action
+from fiduciary.scenarios import load_scenarios
+from fiduciary.schemas import Transcript
 
 DIM_NAMES = {"privacy": "Privacy", "escalation": "Human Oversight / Escalation",
              "policy_compliance": "Policy & Compliance", "fairness": "Fairness (lending)"}

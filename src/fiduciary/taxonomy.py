@@ -5,7 +5,7 @@ from pathlib import Path
 
 import yaml
 
-from trustbench.schemas import Control, Taxonomy
+from fiduciary.schemas import Control, Taxonomy
 
 
 def load_taxonomy(path: str | Path = "data/taxonomy.yaml") -> Taxonomy:

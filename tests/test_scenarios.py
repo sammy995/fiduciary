@@ -2,9 +2,9 @@ from pathlib import Path
 
 import yaml
 
-from trustbench.scenarios import load_scenarios, validate_scenarios
-from trustbench.taxonomy import load_taxonomy
-from trustbench.world import load_world
+from fiduciary.scenarios import load_scenarios, validate_scenarios
+from fiduciary.taxonomy import load_taxonomy
+from fiduciary.world import load_world
 
 GOOD = {
     "id": "W1-PRIV-900", "title": "Test scenario", "dimension": "privacy",

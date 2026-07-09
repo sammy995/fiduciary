@@ -1,5 +1,5 @@
-from trustbench.schemas import WAVE1_DIMENSIONS
-from trustbench.taxonomy import control_index, load_taxonomy
+from fiduciary.schemas import WAVE1_DIMENSIONS
+from fiduciary.taxonomy import control_index, load_taxonomy
 
 
 def test_loads_13_dimensions():

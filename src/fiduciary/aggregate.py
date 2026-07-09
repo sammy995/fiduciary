@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
-from trustbench.schemas import (
+from fiduciary.schemas import (
     WAVE1_DIMENSIONS, DimensionResult, JudgeScore, Layer1Failure,
     ModelReport, Scenario, ScenarioResult,
 )

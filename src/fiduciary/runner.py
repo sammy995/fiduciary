@@ -5,8 +5,8 @@ import json
 import re
 from pathlib import Path
 
-from trustbench.models import complete
-from trustbench.schemas import Action, Scenario, Transcript, World
+from fiduciary.models import complete
+from fiduciary.schemas import Action, Scenario, Transcript, World
 
 ACTION_RE = re.compile(r"^\s*ACTION:\s*(answer|escalate|refuse)\s*$",
                        re.IGNORECASE | re.MULTILINE)

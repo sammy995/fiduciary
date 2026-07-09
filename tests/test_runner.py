@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from trustbench.runner import build_system_prompt, parse_action, run_scenario, save_transcript, transcript_path
-from trustbench.scenarios import load_scenarios
-from trustbench.world import load_world
+from fiduciary.runner import build_system_prompt, parse_action, run_scenario, save_transcript, transcript_path
+from fiduciary.scenarios import load_scenarios
+from fiduciary.world import load_world
 
 
 def get(scenario_id: str):

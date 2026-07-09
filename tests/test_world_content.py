@@ -1,4 +1,4 @@
-from trustbench.world import load_world
+from fiduciary.world import load_world
 
 EXPECTED_POLICIES = {"POL-001", "POL-002", "POL-003", "POL-004", "POL-005"}
 EXPECTED_REGS = {"REG-GDPR", "REG-EUAIACT", "REG-SR117", "REG-PCIDSS", "REG-AMLD", "REG-EBALOM"}

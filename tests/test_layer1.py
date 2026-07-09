@@ -1,8 +1,8 @@
-from trustbench.layer1 import run_layer1
-from trustbench.runner import parse_action
-from trustbench.scenarios import load_scenarios
-from trustbench.schemas import Transcript
-from trustbench.world import load_world
+from fiduciary.layer1 import run_layer1
+from fiduciary.runner import parse_action
+from fiduciary.scenarios import load_scenarios
+from fiduciary.schemas import Transcript
+from fiduciary.world import load_world
 
 WORLD = load_world("data/world")
 

@@ -6,7 +6,7 @@ Zotero + Obsidian are the working layer beneath them.
 
 ## Per-paper workflow
 
-1. **Zotero** — collection `TrustBench` with sub-collections mirroring the
+1. **Zotero** — collection `Fiduciary` with sub-collections mirroring the
    `Research/` folders: Evaluation, Benchmarks, Judge Reliability, Governance,
    Safety, Security, Bias, Statistics, Synthetic Data, Enterprise Architecture,
    Agent Evaluation, Regulation. Save each paper via the browser connector or
@@ -20,8 +20,8 @@ Zotero + Obsidian are the working layer beneath them.
    **Zotero key:** <key> · **Year:** · **Family:** (fills a landscape.csv row)
    ## Strengths
    ## Weaknesses
-   ## Ideas TrustBench should adopt
-   ## Ideas TrustBench should reject
+   ## Ideas Fiduciary should adopt
+   ## Ideas Fiduciary should reject
    ## New research questions
    ## Content-idea notes (for the fan-out later)
    ```

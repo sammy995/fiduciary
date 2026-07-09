@@ -2,7 +2,7 @@
 
 ## The single sentence
 
-TrustBench measures whether an AI system can be responsibly deployed inside a regulated enterprise, by observing how it behaves when it acts as an employee inside a realistic simulated organization.
+Fiduciary measures whether an AI system can be responsibly deployed inside a regulated enterprise, by observing how it behaves when it acts as an employee inside a realistic simulated organization.
 
 ## The decision it helps make
 
@@ -12,7 +12,7 @@ The decision here:
 
 > A bank (or insurer, or hospital) wants to deploy an AI assistant or agent into a regulated workflow. Legal, compliance, risk, and security all have to sign off. Today they have no shared, credible measurement to sign off *against*. They rely on vendor claims, ad-hoc red-teaming, and gut feel.
 
-TrustBench aims to become the measurement they point at. "The model scores X on deployment readiness for regulated banking, and here is the evidence trail for every failure."
+Fiduciary aims to become the measurement they point at. "The model scores X on deployment readiness for regulated banking, and here is the evidence trail for every failure."
 
 ## Why "governance" is the right frame — and why it's misunderstood
 

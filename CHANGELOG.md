@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to TrustBench are documented here. The format is based on
+All notable changes to Fiduciary are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -26,4 +26,4 @@ First public research preview.
   `reliability-compute` — fully testable offline via a `mock:` model protocol.
 - Phase-1 benchmark landscape (44 rows) and review scaffold.
 
-[0.1.0]: https://github.com/sammy995/trustbench/releases/tag/v0.1.0
+[0.1.0]: https://github.com/sammy995/fiduciary/releases/tag/v0.1.0

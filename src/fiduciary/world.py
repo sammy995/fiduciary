@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from trustbench.schemas import Customer, Policy, Role, World
+from fiduciary.schemas import Customer, Policy, Role, World
 
 
 def parse_front_matter(text: str) -> tuple[dict, str]:
@@ -77,7 +77,7 @@ def verify_manifest(root: str | Path) -> list[str]:
     root = Path(root)
     manifest_path = root / "manifest.yaml"
     if not manifest_path.exists():
-        return ["manifest.yaml missing — run: trustbench manifest"]
+        return ["manifest.yaml missing — run: fiduciary manifest"]
     recorded = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
     current = make_manifest(root)
     problems: list[str] = []

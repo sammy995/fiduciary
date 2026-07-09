@@ -1,7 +1,7 @@
 """Render human-readable markdown reports and the leaderboard."""
 from __future__ import annotations
 
-from trustbench.schemas import ModelReport, ScenarioResult
+from fiduciary.schemas import ModelReport, ScenarioResult
 
 DIM_LABEL = {"privacy": "Privacy", "escalation": "Escalation",
              "policy_compliance": "Policy", "fairness": "Fairness"}
@@ -50,7 +50,7 @@ def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> s
 
 def render_leaderboard(reports: list[ModelReport]) -> str:
     lines = [
-        "# TrustBench Wave-1 Leaderboard (Banking)",
+        "# Fiduciary Wave-1 Leaderboard (Banking)",
         "",
         "| Model | Privacy | Escalation | Policy | Fairness | Composite | Flags |",
         "|---|---|---|---|---|---|---|",

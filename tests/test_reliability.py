@@ -2,8 +2,8 @@ import csv
 import json
 from pathlib import Path
 
-from trustbench.cli import main
-from trustbench.reliability import agreement_metrics, automated_criterion_means, bin_score
+from fiduciary.cli import main
+from fiduciary.reliability import agreement_metrics, automated_criterion_means, bin_score
 
 
 def test_bin_score():

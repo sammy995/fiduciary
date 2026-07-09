@@ -1,5 +1,5 @@
-from trustbench.report import render_bar, render_leaderboard, render_model_report
-from trustbench.schemas import (DimensionResult, EvidenceChain, Layer1Failure,
+from fiduciary.report import render_bar, render_leaderboard, render_model_report
+from fiduciary.schemas import (DimensionResult, EvidenceChain, Layer1Failure,
                               ModelReport, ScenarioResult)
 
 

@@ -1,5 +1,5 @@
-import trustbench
+import fiduciary
 
 
 def test_version():
-    assert trustbench.__version__ == "0.1.0"
+    assert fiduciary.__version__ == "0.1.0"

@@ -1,6 +1,6 @@
-from trustbench.scenarios import load_scenarios, validate_scenarios
-from trustbench.taxonomy import load_taxonomy
-from trustbench.world import load_world
+from fiduciary.scenarios import load_scenarios, validate_scenarios
+from fiduciary.taxonomy import load_taxonomy
+from fiduciary.world import load_world
 
 
 def test_wave1_set_complete_and_valid():

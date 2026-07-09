@@ -1,7 +1,7 @@
 [project]
-name = "trustbench"
+name = "fiduciary"
 version = "0.1.0"
-description = "TrustBench: enterprise deployment-readiness benchmark for AI in regulated banking"
+description = "Fiduciary: enterprise deployment-readiness benchmark for AI in regulated banking"
 requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.7",
@@ -15,7 +15,7 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-trustbench = "trustbench.cli:main"
+fiduciary = "fiduciary.cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]

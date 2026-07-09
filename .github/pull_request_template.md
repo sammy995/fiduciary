@@ -11,6 +11,6 @@
 
 ## Checklist
 - [ ] `python -m pytest` is green (offline)
-- [ ] `trustbench validate` prints `OK`
+- [ ] `fiduciary validate` prints `OK`
 - [ ] If `data/world/` changed, the sha256 manifest was regenerated and committed
 - [ ] New behavior has a test

@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Methodology / evaluation discussion
-    url: https://github.com/sammy995/trustbench/discussions
+    url: https://github.com/sammy995/fiduciary/discussions
     about: Questions about the taxonomy, judge design, or reliability method.

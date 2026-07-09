@@ -11,9 +11,9 @@ from pathlib import Path
 import krippendorff
 from sklearn.metrics import cohen_kappa_score
 
-from trustbench.runner import _safe_model_name, transcript_path
-from trustbench.scenarios import load_scenarios
-from trustbench.schemas import Transcript
+from fiduciary.runner import _safe_model_name, transcript_path
+from fiduciary.scenarios import load_scenarios
+from fiduciary.schemas import Transcript
 
 SCENARIO_DIR = "data/scenarios/wave1"
 

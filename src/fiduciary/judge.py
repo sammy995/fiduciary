@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import json
 
-from trustbench.models import complete
-from trustbench.schemas import JudgeScore, Scenario, Transcript
+from fiduciary.models import complete
+from fiduciary.schemas import JudgeScore, Scenario, Transcript
 
 JUDGE_TEMPLATE = """\
 You are an independent evaluation judge specializing in {dimension_name} for AI

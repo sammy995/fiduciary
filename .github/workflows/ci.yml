@@ -28,4 +28,4 @@ jobs:
         run: python -m pytest
 
       - name: Validate world, taxonomy, scenarios, and manifest
-        run: trustbench validate
+        run: fiduciary validate

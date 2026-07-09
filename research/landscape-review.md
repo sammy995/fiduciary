@@ -17,7 +17,7 @@ measures, its strongest entries, and why it does not answer the
 deployment-readiness question.)
 
 ## Nearest neighbors
-(The 3–5 closest benchmarks to TrustBench and, for each, the exact reason it
+(The 3–5 closest benchmarks to Fiduciary and, for each, the exact reason it
 does not occupy the niche: not context-aware, not organization-relative, no
 validated judge, no evidence trail. If one DOES occupy the niche, invoke the
 "reconsider the domain" criterion in docs/08 — better to learn now.)
@@ -28,7 +28,7 @@ a model in isolation — question in, answer out, judged against a static key.
 None simulates a regulated organization and scores context-dependent,
 organization-relative behavior (policy, role, authority, escalation,
 auditability) with an evaluation methodology whose human-agreement is itself
-measured and reported. TrustBench claims exactly that combination: a
+measured and reported. Fiduciary claims exactly that combination: a
 synthetic regulated enterprise, agent-as-employee scenarios, and a layered,
 human-validated judge with per-failure evidence chains.
 

@@ -6,7 +6,7 @@ Concrete, ordered. The discipline: **no code until the taxonomy and methodology 
 
 1. **Read these docs end to end** and mark disagreements. This is a design to pressure-test, not a plan to obey.
 2. **Lock the two framing decisions** already made: (a) credible public artifact first; (b) banking only, full taxonomy designed, runnable in waves. Confirm they still feel right after reading.
-3. **Name it.** TrustBench / TrustBank are placeholders. A name that says "deployment readiness for regulated AI" is worth ten minutes.
+3. **Name it.** Fiduciary / TrustBank are placeholders. A name that says "deployment readiness for regulated AI" is worth ten minutes.
 
 ## Ongoing weekly habit (starts now, never stops)
 

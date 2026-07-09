@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🏦 TrustBench
+# 🏦 Fiduciary
 
 ### Can your AI hold a job at a regulated bank?
 
-**TrustBench drops a language model into a synthetic regulated bank as an employee, gives it real tasks under real policy, and audits whether its *behavior* would survive legal, compliance, risk, and audit sign-off.**
+**Fiduciary drops a language model into a synthetic regulated bank as an employee, gives it real tasks under real policy, and audits whether its *behavior* would survive legal, compliance, risk, and audit sign-off.**
 
 Not "is the model smart." Not "is the model safe in the abstract." A different, largely unclaimed question: **is this AI deployable inside a regulated organization?**
 
-[![CI](https://github.com/sammy995/trustbench/actions/workflows/ci.yml/badge.svg)](https://github.com/sammy995/trustbench/actions/workflows/ci.yml)
+[![CI](https://github.com/sammy995/fiduciary/actions/workflows/ci.yml/badge.svg)](https://github.com/sammy995/fiduciary/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-55%20passing-brightgreen.svg)](tests/)
@@ -35,15 +35,15 @@ Not "is the model smart." Not "is the model safe in the abstract." A different, 
         Trust Score  +  per-failure evidence trail  +  deployment verdict
 ```
 
-## Why TrustBench exists
+## Why Fiduciary exists
 
 Almost every benchmark is `question → model → answer → correct?`. That works for knowledge. It **fails for governance**, because governance is contextual and organizational. *"Can I approve this loan?"* has no correct answer in a vacuum — only given a customer, a policy, a regulation, a history, and an escalation path.
 
-A bank (or insurer, or hospital) that wants to deploy an AI assistant into a regulated workflow has legal, compliance, risk, and security sign-offs to clear — and **no shared, credible measurement to sign off against.** They rely on vendor claims, ad-hoc red-teaming, and gut feel. TrustBench is built to become the thing they point at: *"the model scores X on deployment readiness for regulated banking, and here is the evidence trail for every failure."*
+A bank (or insurer, or hospital) that wants to deploy an AI assistant into a regulated workflow has legal, compliance, risk, and security sign-offs to clear — and **no shared, credible measurement to sign off against.** They rely on vendor claims, ad-hoc red-teaming, and gut feel. Fiduciary is built to become the thing they point at: *"the model scores X on deployment readiness for regulated banking, and here is the evidence trail for every failure."*
 
 ## What makes it one of a kind
 
-| | Most benchmarks | **TrustBench** |
+| | Most benchmarks | **Fiduciary** |
 |---|---|---|
 | Unit of evaluation | a prompt | a **role + task inside a simulated organization** |
 | "Correct" answer | a static key | **derivable from the world's policies & data** |
@@ -56,22 +56,22 @@ The moat is **domain depth**. Anyone can generate 1,000 prompts. Encoding what a
 ## Quickstart
 
 ```bash
-git clone https://github.com/sammy995/trustbench.git
-cd trustbench
+git clone https://github.com/sammy995/fiduciary.git
+cd fiduciary
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 
 python -m pytest          # 55 tests, fully offline (no API keys needed)
-trustbench validate       # checks the world, taxonomy, scenarios, and sha256 manifest → "OK"
+fiduciary validate       # checks the world, taxonomy, scenarios, and sha256 manifest → "OK"
 ```
 
 Run a model through Wave 1 (any provider via [litellm](https://github.com/BerriAI/litellm) — local Ollama shown):
 
 ```bash
-trustbench run    --model ollama_chat/llama3.1:8b --out results/run-001
-trustbench judge  --run results/run-001 --model ollama_chat/llama3.1:8b --judges ollama_chat/qwen2.5:7b
-trustbench score  --run results/run-001 --model ollama_chat/llama3.1:8b
-trustbench report --run results/run-001
+fiduciary run    --model ollama_chat/llama3.1:8b --out results/run-001
+fiduciary judge  --run results/run-001 --model ollama_chat/llama3.1:8b --judges ollama_chat/qwen2.5:7b
+fiduciary score  --run results/run-001 --model ollama_chat/llama3.1:8b
+fiduciary report --run results/run-001
 ```
 
 Everything is testable **offline** with mock models (`mock:fixture:good`, `mock:judge`) — real runs need only provider API keys or a local Ollama server. See [`REPRODUCING.md`](REPRODUCING.md).
@@ -118,7 +118,7 @@ The dataset is not the bottleneck to adoption — **trust in the evaluation is.*
 
 - **Layer 1 — deterministic checks.** PII/secret leakage, action taken vs required, fabricated vs real policy citations, missing mandatory escalation. Fast, cheap, byte-for-byte reproducible. Catches as much as possible without model judgment.
 - **Layer 3 — dimension-specific LLM judges.** One judge per dimension, scored **only against the scenario's expert-authored rubric**, run across **multiple vendor models**. Agreement → confidence; disagreement → the item is **flagged, not silently averaged**.
-- **Layer 0 — human validation.** The credibility keystone: expert raters score a sample, and TrustBench reports how well the automated stack agrees with them (Cohen's κ, Krippendorff's α). The reliability of the *evaluation itself* is treated as a first-class result. See [`reliability/PILOT-RUNBOOK.md`](reliability/PILOT-RUNBOOK.md).
+- **Layer 0 — human validation.** The credibility keystone: expert raters score a sample, and Fiduciary reports how well the automated stack agrees with them (Cohen's κ, Krippendorff's α). The reliability of the *evaluation itself* is treated as a first-class result. See [`reliability/PILOT-RUNBOOK.md`](reliability/PILOT-RUNBOOK.md).
 
 ## Repository map
 
@@ -127,13 +127,17 @@ The dataset is not the bottleneck to adoption — **trust in the evaluation is.*
 | [`data/taxonomy.yaml`](data/taxonomy.yaml) | The 13-dimension trust taxonomy, controls mapped to real regulations |
 | [`data/world/`](data/world/) | **TrustBank** — policies, regulation excerpts, synthetic customers, org chart, sha256 manifest |
 | [`data/scenarios/wave1/`](data/scenarios/wave1/) | 56 scenarios (14 × 4 dimensions), each with rubric + evidence chain |
-| [`src/trustbench/`](src/trustbench/) | The harness: runner, layer-1 checks, judges, aggregation, reports, reliability, CLI |
+| [`src/fiduciary/`](src/fiduciary/) | The **domain-agnostic engine**: runner, layer-1 checks, judges, aggregation, reports, reliability, CLI |
 | [`docs/`](docs/) | The design & thesis: vision, landscape/gap, taxonomy, world, evaluation, roadmap, risks |
+| [`docs/design-decisions/`](docs/design-decisions/) | ADRs — every major choice with its rejected alternatives |
+| [`docs/threats-to-validity.md`](docs/threats-to-validity.md) | Construct / internal / external validity and limitations |
+| [`papers/`](papers/) | Paper drafts the repo evolves alongside (taxonomy · methodology · results) |
+| [`references/`](references/) | BibTeX citation library (frameworks + eval methodology) |
 | [`research/`](research/) | Phase-1 benchmark landscape (44 rows) + review |
 | [`reliability/`](reliability/) | The human-agreement pilot runbook and decision gate |
-| [`REPRODUCING.md`](REPRODUCING.md) | Exact steps to reproduce any published run |
+| [`VERSIONS.md`](VERSIONS.md) · [`REPRODUCING.md`](REPRODUCING.md) | Independent component versions · steps to reproduce a run |
 
-**TrustBench** is the benchmark. **TrustBank** is the synthetic bank it drops models into. (One letter apart, on purpose.)
+**Fiduciary** is the benchmark **and the engine** — a domain-agnostic *Enterprise Digital Twin for AI Evaluation*. Banking (**TrustBank**) is instance #1; healthcare, insurance, and government reuse the same engine, method, judge, and scoring, changing only the synthetic world ([ADR 0007](docs/design-decisions/0007-engine-vs-benchmark.md)).
 
 ## Status
 
@@ -147,11 +151,11 @@ Everything open and versioned; every objective check reproducible; every world s
 
 ## Contributing
 
-Scenario authors with banking / compliance / risk / audit experience are especially valuable — see [`CONTRIBUTING.md`](CONTRIBUTING.md). Every scenario is validated against the world and taxonomy (`trustbench validate`) in CI.
+Scenario authors with banking / compliance / risk / audit experience are especially valuable — see [`CONTRIBUTING.md`](CONTRIBUTING.md). Every scenario is validated against the world and taxonomy (`fiduciary validate`) in CI.
 
 ## Citation
 
-If you use TrustBench, please cite it — see [`CITATION.cff`](CITATION.cff).
+If you use Fiduciary, please cite it — see [`CITATION.cff`](CITATION.cff).
 
 ## License
 

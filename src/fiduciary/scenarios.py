@@ -5,8 +5,8 @@ from pathlib import Path
 
 import yaml
 
-from trustbench.schemas import Customer, Scenario, Taxonomy, World
-from trustbench.taxonomy import control_index
+from fiduciary.schemas import Customer, Scenario, Taxonomy, World
+from fiduciary.taxonomy import control_index
 
 CUSTOMER_FIELDS = set(Customer.model_fields)
 

@@ -17,7 +17,7 @@ labels: bug
 **Environment**
 - OS:
 - Python version:
-- TrustBench commit:
+- Fiduciary commit:
 
 **Output / traceback**
 ```text

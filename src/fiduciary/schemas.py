@@ -1,4 +1,4 @@
-"""Pydantic data models shared across TrustBench."""
+"""Pydantic data models shared across Fiduciary."""
 from __future__ import annotations
 
 from typing import Literal
