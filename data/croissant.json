@@ -1,0 +1,65 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "fiduciary": "https://github.com/sammy995/fiduciary#"
+  },
+  "@type": "sc:Dataset",
+  "dct:conformsTo": "http://mlcommons.org/croissant/1.0",
+  "name": "fiduciary-wave1-scenarios",
+  "description": "56 governance scenarios for evaluating AI behavior inside a synthetic regulated bank: privacy, escalation, policy compliance, and fairness in lending. Each scenario carries a rubric and an evidence chain. Synthetic data only.",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "url": "https://github.com/sammy995/fiduciary",
+  "version": "1.1.0",
+  "citeAs": "See CITATION.cff",
+  "fiduciary:scenarioCount": 56,
+  "distribution": [
+    {
+      "@type": "cr:FileSet",
+      "@id": "wave1-scenarios",
+      "name": "wave1-scenarios",
+      "encodingFormat": "application/x-yaml",
+      "includes": "data/scenarios/wave1/*.yaml"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "scenarios",
+      "name": "scenarios",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "dimension",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "band",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "role",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "task",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "expected_behavior",
+          "dataType": "sc:Text"
+        }
+      ]
+    }
+  ]
+}
