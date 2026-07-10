@@ -10,7 +10,7 @@ records it.
 | Engine (`fiduciary` package) | 0.1.0 | `pyproject.toml` |
 | Taxonomy | 1.0.0 | `data/taxonomy.yaml` (`version:`) |
 | World (TrustBank) | 0.1.0 | `data/world/org.yaml` + `data/world/manifest.yaml` (sha256) |
-| Scenario set (Wave 1) | 1.0.0 | `data/scenarios/wave1/` (56 scenarios) |
+| Scenario set (Wave 1) | 1.1.0 | `data/scenarios/wave1/` (56 scenarios) |
 | Judge | 0.1.0 | judge prompt + scoring rules in `src/fiduciary/{judge,aggregate}.py` |
 | Standards crosswalk | 0.1.0 | `standards/crosswalk.yaml` (`version:`) |
 

@@ -14,6 +14,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   "not a finance benchmark" clarification.
 - Every dimension score and composite now carries a seeded 95% bootstrap
   confidence interval, rendered in model reports and the leaderboard.
+- Training-data canary GUID prepended to all 56 scenario files
+  (scenario-set 1.1.0); its presence is enforced by a test.
 
 ## [0.1.0] — 2026-07-09
 
