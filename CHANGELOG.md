@@ -12,6 +12,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   sector frameworks, gated behind human review.
 - README: fiduciary-duty framing with the duty-to-dimension table and the
   "not a finance benchmark" clarification.
+- Every dimension score and composite now carries a seeded 95% bootstrap
+  confidence interval, rendered in model reports and the leaderboard.
 
 ## [0.1.0] — 2026-07-09
 
