@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from fiduciary.aggregate import build_model_report, score_scenario
+from fiduciary.crosswalk import load_crosswalk, validate_crosswalk
 from fiduciary.judge import judge_transcript
 from fiduciary.layer1 import run_layer1
 from fiduciary.report import render_leaderboard, render_model_report
@@ -35,8 +36,10 @@ def _select(scenario_dir: str, ids: str | None):
 
 def cmd_validate(_args) -> int:
     world = load_world(WORLD_ROOT)
-    problems = validate_scenarios(load_scenarios(SCENARIO_DIR), world, load_taxonomy())
+    taxonomy = load_taxonomy()
+    problems = validate_scenarios(load_scenarios(SCENARIO_DIR), world, taxonomy)
     problems += verify_manifest(WORLD_ROOT)
+    problems += validate_crosswalk(load_crosswalk(), taxonomy)
     for p in problems:
         print(f"PROBLEM: {p}")
     print("OK" if not problems else f"{len(problems)} problem(s)")
