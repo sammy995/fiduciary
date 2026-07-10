@@ -12,6 +12,7 @@ records it.
 | World (TrustBank) | 0.1.0 | `data/world/org.yaml` + `data/world/manifest.yaml` (sha256) |
 | Scenario set (Wave 1) | 1.0.0 | `data/scenarios/wave1/` (56 scenarios) |
 | Judge | 0.1.0 | judge prompt + scoring rules in `src/fiduciary/{judge,aggregate}.py` |
+| Standards crosswalk | 0.1.0 | `standards/crosswalk.yaml` (`version:`) |
 
 ## Rules
 
@@ -20,5 +21,7 @@ records it.
 - Change judge prompts or scoring math → bump the Judge version here and note it
   in `CHANGELOG.md`.
 - Add/edit scenarios → bump the Scenario-set version.
+- Change any crosswalk mapping → bump the crosswalk version and re-review
+  (`review_status` returns to `pending-human-review`).
 - Leaderboards and published scores must display this tuple, not just the engine
   version.
