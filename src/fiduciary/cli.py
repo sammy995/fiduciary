@@ -118,8 +118,11 @@ def cmd_report(args) -> int:
     run_dir = Path(args.run)
     report_dir = run_dir / "report"
     report_dir.mkdir(parents=True, exist_ok=True)
-    crosswalk = load_crosswalk()
-    if crosswalk.get("review_status") != "reviewed":
+    try:
+        crosswalk = load_crosswalk()
+    except FileNotFoundError:
+        crosswalk = None
+    if crosswalk and crosswalk.get("review_status") != "reviewed":
         crosswalk = None  # mappings are not citable until a human reviews them
     reports: list[ModelReport] = []
     for path in sorted((run_dir / "scores").glob("*.json")):
