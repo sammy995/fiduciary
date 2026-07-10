@@ -5,8 +5,12 @@ procedure. If any step's output differs, the run is not comparable — say so.
 
 ## Setup
     python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-    pip install -e ".[dev]"
+    pip install -e ".[dev]" -c constraints.txt
     python -m pytest                                    # must be green, fully offline
+
+`constraints.txt` pins the exact dependency versions a published run used;
+a constraints file only pins versions, it does not force extra packages
+onto other platforms.
 
 ## Verify the pinned world
     fiduciary validate
