@@ -12,7 +12,27 @@ def render_bar(score: float) -> str:
     return "█" * filled + "░" * (10 - filled)
 
 
-def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> str:
+_REF_LABELS = (("nist_ai_rmf", "NIST AI RMF"), ("iso_42001", "ISO/IEC 42001"),
+               ("eu_ai_act", "EU AI Act"), ("other", ""))
+
+
+def crosswalk_refs(crosswalk: dict | None, control_id: str) -> str:
+    """Framework references for one control. The sector entry is skipped
+    because the evidence line already carries the sector regulation."""
+    if not crosswalk:
+        return ""
+    entry = (crosswalk.get("mappings") or {}).get(control_id)
+    if not entry:
+        return ""
+    parts = []
+    for key, label in _REF_LABELS:
+        for ref in entry.get(key) or []:
+            parts.append(f"{label} {ref}".strip())
+    return "; ".join(parts)
+
+
+def render_model_report(report: ModelReport, results: list[ScenarioResult],
+                        crosswalk: dict | None = None) -> str:
     lines = [
         f"# Deployment Readiness (Banking) — {report.model}",
         "",
@@ -42,6 +62,9 @@ def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> s
                     f"- Control **{ev.control_id}** → risk **{ev.risk_level}** → "
                     f"{ev.regulation} → expected: {ev.expected_evidence} → "
                     f"mitigation: {ev.mitigation}")
+                refs = crosswalk_refs(crosswalk, ev.control_id)
+                if refs:
+                    lines.append(f"  - maps to: {refs}")
             lines.append("")
     if not any_evidence:
         lines.append("No layer-1 failures — all evidence at judge level.")
