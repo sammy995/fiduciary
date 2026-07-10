@@ -20,6 +20,7 @@ def build() -> dict:
             "@vocab": "https://schema.org/",
             "sc": "https://schema.org/",
             "cr": "http://mlcommons.org/croissant/",
+            "dct": "http://purl.org/dc/terms/",
             "fiduciary": "https://github.com/sammy995/fiduciary#",
         },
         "@type": "sc:Dataset",
