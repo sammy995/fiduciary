@@ -12,7 +12,27 @@ def render_bar(score: float) -> str:
     return "█" * filled + "░" * (10 - filled)
 
 
-def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> str:
+_REF_LABELS = (("nist_ai_rmf", "NIST AI RMF"), ("iso_42001", "ISO/IEC 42001"),
+               ("eu_ai_act", "EU AI Act"), ("other", ""))
+
+
+def crosswalk_refs(crosswalk: dict | None, control_id: str) -> str:
+    """Framework references for one control. The sector entry is skipped
+    because the evidence line already carries the sector regulation."""
+    if not crosswalk:
+        return ""
+    entry = (crosswalk.get("mappings") or {}).get(control_id)
+    if not entry:
+        return ""
+    parts = []
+    for key, label in _REF_LABELS:
+        for ref in entry.get(key) or []:
+            parts.append(f"{label} {ref}".strip())
+    return "; ".join(parts)
+
+
+def render_model_report(report: ModelReport, results: list[ScenarioResult],
+                        crosswalk: dict | None = None) -> str:
     lines = [
         f"# Deployment Readiness (Banking) — {report.model}",
         "",
@@ -23,8 +43,12 @@ def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> s
     ]
     for dim, score in sorted(report.dimension_scores.items()):
         flag = " ⚑" if dim in report.flagged_dimensions else ""
-        lines.append(f"| {DIM_LABEL.get(dim, dim)}{flag} | {score} | `{render_bar(score)}` |")
-    lines += ["", f"**Composite: {report.composite}**"
+        ci = report.dimension_cis.get(dim)
+        ci_text = f" (95% CI [{ci[0]}, {ci[1]}])" if ci else ""
+        lines.append(f"| {DIM_LABEL.get(dim, dim)}{flag} | {score}{ci_text} | `{render_bar(score)}` |")
+    composite_ci_text = (f" (95% CI [{report.composite_ci[0]}, {report.composite_ci[1]}])"
+                         if report.composite_ci else "")
+    lines += ["", f"**Composite: {report.composite}{composite_ci_text}**"
               + (f" — {len(report.flagged_dimensions)} dimension(s) flagged for human review"
                  if report.flagged_dimensions else ""), "", "## Evidence trail", ""]
 
@@ -42,6 +66,9 @@ def render_model_report(report: ModelReport, results: list[ScenarioResult]) -> s
                     f"- Control **{ev.control_id}** → risk **{ev.risk_level}** → "
                     f"{ev.regulation} → expected: {ev.expected_evidence} → "
                     f"mitigation: {ev.mitigation}")
+                refs = crosswalk_refs(crosswalk, ev.control_id)
+                if refs:
+                    lines.append(f"  - maps to: {refs}")
             lines.append("")
     if not any_evidence:
         lines.append("No layer-1 failures — all evidence at judge level.")
@@ -57,8 +84,9 @@ def render_leaderboard(reports: list[ModelReport]) -> str:
     ]
     for r in sorted(reports, key=lambda r: r.composite, reverse=True):
         d = r.dimension_scores
+        ci = (f" [{r.composite_ci[0]}, {r.composite_ci[1]}]" if r.composite_ci else "")
         lines.append(
             f"| {r.model} | {d.get('privacy', '—')} | {d.get('escalation', '—')} | "
             f"{d.get('policy_compliance', '—')} | {d.get('fairness', '—')} | "
-            f"**{r.composite}** | {', '.join(r.flagged_dimensions) or '—'} |")
+            f"**{r.composite}**{ci} | {', '.join(r.flagged_dimensions) or '—'} |")
     return "\n".join(lines) + "\n"

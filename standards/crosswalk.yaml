@@ -1,0 +1,145 @@
+# Informative mappings from taxonomy controls to external frameworks.
+# See standards/README.md for what "informative" means and the review rule.
+# Copy discipline: every clause identifier in this file was placed here from
+# the implementation plan's reference sheet. Do not add identifiers from
+# memory; add "status: needs-human-verification" instead.
+version: "0.1.0"
+review_status: pending-human-review
+scope: wave1
+frameworks:
+  nist_ai_rmf:
+    name: "NIST AI Risk Management Framework 1.0 (NIST AI 100-1, 2023)"
+    url: "https://doi.org/10.6028/NIST.AI.100-1"
+  iso_42001:
+    name: "ISO/IEC 42001:2023 Annex A controls (clause texts pending verification against the authoritative text)"
+    url: "https://www.iso.org/standard/42001"
+  eu_ai_act:
+    name: "Regulation (EU) 2024/1689 (AI Act)"
+    url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+  sector:
+    name: "Sector rules the taxonomy already cites (GDPR, PCI DSS, AMLD5, MiFID II, EBA, SR 11-7, COSO)"
+    url: ""
+  other:
+    name: "Additional frameworks (MAS FEAT, FATF, ECOA Reg B, FCA guidance, ISO/IEC TR 24027, ISO/IEC 27701, BCBS 239)"
+    url: ""
+mappings:
+  PRIV-C1:
+    nist_ai_rmf: ["MEASURE 2.10", "GOVERN 1.1"]
+    iso_42001: ["A.7.2 (data management) [verify]"]
+    eu_ai_act: []
+    sector: ["GDPR Art. 5(1)(b),(c)"]
+    other: ["ISO/IEC 27701 (privacy information management, family level)"]
+  PRIV-C2:
+    nist_ai_rmf: ["MEASURE 2.10"]
+    iso_42001: ["A.9.2 (processes for responsible use) [verify]"]
+    eu_ai_act: []
+    sector: ["GDPR Art. 32"]
+    other: []
+  PRIV-C3:
+    nist_ai_rmf: ["MEASURE 2.10"]
+    iso_42001: ["A.7.2 (data management) [verify]"]
+    eu_ai_act: []
+    sector: ["GDPR Art. 5(1)(f)"]
+    other: []
+  PRIV-C4:
+    nist_ai_rmf: ["GOVERN 1.1"]
+    iso_42001: ["A.8.3 (external reporting) [verify]", "A.9.2 (processes for responsible use) [verify]"]
+    eu_ai_act: []
+    sector: ["GDPR Art. 17"]
+    other: []
+  PRIV-C5:
+    nist_ai_rmf: ["MEASURE 2.10"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["PCI DSS Req. 3.3 (v3.2.1 numbering; v4 renumbers to 3.4.1) [verify]"]
+    other: []
+  ESC-C1:
+    nist_ai_rmf: ["GOVERN 3.2"]
+    iso_42001: ["A.9.2 (processes for responsible use) [verify]", "A.9.4 (intended use) [verify]"]
+    eu_ai_act: ["Art. 14 (human oversight)"]
+    sector: ["MiFID II Art. 24-25"]
+    other: ["MAS FEAT (Accountability, family level) [verify]"]
+  ESC-C2:
+    nist_ai_rmf: ["GOVERN 3.2", "MANAGE 2"]
+    iso_42001: ["A.9.4 (intended use) [verify]"]
+    eu_ai_act: ["Annex III 5(b)", "Art. 26 (deployer obligations)"]
+    sector: ["SR 11-7"]
+    other: []
+  ESC-C3:
+    nist_ai_rmf: ["GOVERN 3.2"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["EBA consumer protection guidelines"]
+    other: ["FCA FG21/1 (fair treatment of vulnerable customers) [verify]"]
+  ESC-C4:
+    nist_ai_rmf: ["GOVERN 1.1"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["AMLD5 Art. 39 (tipping-off prohibition)"]
+    other: ["FATF Recommendation 21"]
+  ESC-C5:
+    nist_ai_rmf: ["GOVERN 3", "GOVERN 4.1"]
+    iso_42001: ["A.3.3 (reporting of concerns) [verify]"]
+    eu_ai_act: []
+    sector: ["Three Lines of Defense model"]
+    other: []
+  POL-C1:
+    nist_ai_rmf: ["MAP 2", "MEASURE 2.5"]
+    iso_42001: ["A.6.2.4 (verification and validation) [verify]"]
+    eu_ai_act: ["Art. 15 (accuracy)"]
+    sector: ["SR 11-7 (documentation)"]
+    other: []
+  POL-C2:
+    nist_ai_rmf: ["GOVERN 1"]
+    iso_42001: ["A.9.2 (processes for responsible use) [verify]"]
+    eu_ai_act: ["Art. 26 (deployer obligations)"]
+    sector: []
+    other: []
+  POL-C3:
+    nist_ai_rmf: ["GOVERN 1.1"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["AMLD5 Art. 13 (customer due diligence)"]
+    other: ["FATF Recommendation 10"]
+  POL-C4:
+    nist_ai_rmf: ["MEASURE 2.10"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["GDPR Art. 6, 7"]
+    other: ["ePrivacy Directive Art. 13"]
+  POL-C5:
+    nist_ai_rmf: ["GOVERN 2"]
+    iso_42001: ["A.3.2 (roles and responsibilities) [verify]", "A.9.4 (intended use) [verify]"]
+    eu_ai_act: ["Art. 26 (deployer obligations)"]
+    sector: ["COSO Internal Control framework"]
+    other: []
+  FAIR-C1:
+    nist_ai_rmf: ["MEASURE 2.11"]
+    iso_42001: []
+    eu_ai_act: ["Annex III 5(b)", "Art. 10(2)(f) (bias examination) [verify]"]
+    sector: ["EU equal-treatment directives"]
+    other: ["ISO/IEC TR 24027 (bias in AI)", "ECOA / Regulation B (US analog, family level)"]
+  FAIR-C2:
+    nist_ai_rmf: ["MEASURE 2.11"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: []
+    other: ["ISO/IEC TR 24027 (bias in AI)", "MAS FEAT (Fairness, family level) [verify]"]
+  FAIR-C3:
+    nist_ai_rmf: ["MEASURE 2.11"]
+    iso_42001: []
+    eu_ai_act: ["Art. 10 (data and data governance)"]
+    sector: ["EBA Guidelines on loan origination and monitoring"]
+    other: []
+  FAIR-C4:
+    nist_ai_rmf: ["GOVERN 1.1"]
+    iso_42001: []
+    eu_ai_act: []
+    sector: ["EBA consumer protection guidelines"]
+    other: ["FCA FG21/1 (fair treatment of vulnerable customers) [verify]"]
+  FAIR-C5:
+    nist_ai_rmf: ["MEASURE 2.9"]
+    iso_42001: []
+    eu_ai_act: ["Art. 86 (right to explanation of individual decision-making)"]
+    sector: ["GDPR Art. 22"]
+    other: ["ECOA / Regulation B §1002.9 (adverse action notices)"]

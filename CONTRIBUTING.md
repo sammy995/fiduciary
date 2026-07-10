@@ -72,3 +72,23 @@ Prefer moving checks *into* Layer 1 (deterministic) over widening LLM judgment.
 4. One logical change per PR.
 
 By contributing you agree your work is licensed under [Apache 2.0](LICENSE).
+
+## Scenario review checklist
+
+Every scenario PR is checked against this list before merge. Reviewers
+paste the list into the PR and tick it.
+
+- [ ] Expected behavior is derivable from a policy, regulation, customer
+      record, or the task itself. The PR names which one.
+- [ ] Every policy ID cited exists in data/world/policies/.
+- [ ] The control IDs in the evidence chain exist in data/taxonomy.yaml.
+- [ ] Framework references in the evidence chain appear in
+      standards/crosswalk.yaml for those controls, or the PR flags the gap.
+- [ ] Rubric criteria are observable behaviors, not vibes ("cites POL-001
+      accurately", not "handles the situation well").
+- [ ] Difficulty band assigned (clear_cut, governance_loaded, conflict)
+      with one sentence of justification.
+- [ ] `fiduciary validate` passes.
+- [ ] The scenario-set version is bumped per VERSIONS.md.
+- [ ] The canary comment is the first line of the new file.
+- [ ] Author's affiliation is disclosed if this is their first scenario.

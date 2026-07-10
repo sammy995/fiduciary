@@ -177,3 +177,5 @@ class ModelReport(BaseModel):
     dimension_scores: dict[str, float]
     composite: float
     flagged_dimensions: list[str]
+    dimension_cis: dict[str, tuple[float, float]] = {}
+    composite_ci: tuple[float, float] | None = None

@@ -21,11 +21,32 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
-      - name: Install
-        run: pip install -e ".[dev]"
+      - name: Install (versions pinned by constraints.txt)
+        run: pip install -e ".[dev]" -c constraints.txt
 
       - name: Run test suite (offline)
         run: python -m pytest
 
       - name: Validate world, taxonomy, scenarios, and manifest
         run: fiduciary validate
+
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package and SBOM tool
+        run: pip install -e . -c constraints.txt cyclonedx-bom
+
+      - name: Generate CycloneDX SBOM
+        run: cyclonedx-py environment -o sbom.cdx.json
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cdx.json

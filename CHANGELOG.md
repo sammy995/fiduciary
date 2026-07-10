@@ -4,6 +4,19 @@ All notable changes to Fiduciary are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Standards crosswalk (`standards/crosswalk.yaml`): informative mappings from
+  wave-1 taxonomy controls to NIST AI RMF, ISO/IEC 42001, the EU AI Act, and
+  sector frameworks, gated behind human review.
+- README: fiduciary-duty framing with the duty-to-dimension table and the
+  "not a finance benchmark" clarification.
+- Every dimension score and composite now carries a seeded 95% bootstrap
+  confidence interval, rendered in model reports and the leaderboard.
+- Training-data canary GUID prepended to all 56 scenario files
+  (scenario-set 1.1.0); its presence is enforced by a test.
+
 ## [0.1.0] — 2026-07-09
 
 First public research preview.

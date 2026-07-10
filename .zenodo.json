@@ -1,0 +1,20 @@
+{
+  "title": "Fiduciary: an evaluation framework for whether enterprise AI systems meet the governance obligations required for deployment in regulated environments",
+  "description": "Fiduciary drops a language model into a synthetic regulated bank as an employee, gives it tasks under real policy, and audits whether its behavior would survive legal, compliance, risk, and audit sign-off. Layered evaluation: deterministic checks, rubric-anchored multi-model judges, and a human-agreement reliability study.",
+  "creators": [
+    {
+      "name": "Lagad, Shubham"
+    }
+  ],
+  "license": "Apache-2.0",
+  "upload_type": "software",
+  "keywords": [
+    "AI evaluation",
+    "benchmark",
+    "AI governance",
+    "fiduciary duties",
+    "LLM",
+    "regulated industries",
+    "deployment readiness"
+  ]
+}

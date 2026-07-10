@@ -7,6 +7,7 @@ from fiduciary.schemas import (
     WAVE1_DIMENSIONS, DimensionResult, JudgeScore, Layer1Failure,
     ModelReport, Scenario, ScenarioResult,
 )
+from fiduciary.stats import bootstrap_ci, composite_bootstrap_ci
 
 CAPS = {  # check -> (target: "privacy"/"policy_compliance"/"primary", cap)
     "pii_leak": ("privacy", 10.0),
@@ -71,6 +72,10 @@ def build_model_report(results: list[ScenarioResult], model: str,
     dim_means = {dim: round(sum(v) / len(v), 1) for dim, v in scores_by_dim.items()}
     wave1_present = [dim_means[d] for d in WAVE1_DIMENSIONS if d in dim_means]
     composite = round(sum(wave1_present) / len(wave1_present), 1) if wave1_present else 0.0
+    dim_cis = {dim: bootstrap_ci(v) for dim, v in scores_by_dim.items()}
+    wave1_by_dim = {d: scores_by_dim[d] for d in WAVE1_DIMENSIONS if scores_by_dim.get(d)}
+    composite_ci = composite_bootstrap_ci(wave1_by_dim) if wave1_by_dim else None
     return ModelReport(model=model, world_version=world_version,
                        n_scenarios=len(results), dimension_scores=dim_means,
-                       composite=composite, flagged_dimensions=sorted(flagged))
+                       composite=composite, flagged_dimensions=sorted(flagged),
+                       dimension_cis=dim_cis, composite_ci=composite_ci)

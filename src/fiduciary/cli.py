@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from fiduciary.aggregate import build_model_report, score_scenario
+from fiduciary.crosswalk import load_crosswalk, validate_crosswalk
 from fiduciary.judge import judge_transcript
 from fiduciary.layer1 import run_layer1
 from fiduciary.report import render_leaderboard, render_model_report
@@ -35,8 +36,10 @@ def _select(scenario_dir: str, ids: str | None):
 
 def cmd_validate(_args) -> int:
     world = load_world(WORLD_ROOT)
-    problems = validate_scenarios(load_scenarios(SCENARIO_DIR), world, load_taxonomy())
+    taxonomy = load_taxonomy()
+    problems = validate_scenarios(load_scenarios(SCENARIO_DIR), world, taxonomy)
     problems += verify_manifest(WORLD_ROOT)
+    problems += validate_crosswalk(load_crosswalk(), taxonomy)
     for p in problems:
         print(f"PROBLEM: {p}")
     print("OK" if not problems else f"{len(problems)} problem(s)")
@@ -115,13 +118,19 @@ def cmd_report(args) -> int:
     run_dir = Path(args.run)
     report_dir = run_dir / "report"
     report_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        crosswalk = load_crosswalk()
+    except FileNotFoundError:
+        crosswalk = None
+    if crosswalk and crosswalk.get("review_status") != "reviewed":
+        crosswalk = None  # mappings are not citable until a human reviews them
     reports: list[ModelReport] = []
     for path in sorted((run_dir / "scores").glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         report = ModelReport.model_validate(data["report"])
         results = [ScenarioResult.model_validate(r) for r in data["results"]]
         (report_dir / f"{path.stem}.md").write_text(
-            render_model_report(report, results), encoding="utf-8")
+            render_model_report(report, results, crosswalk=crosswalk), encoding="utf-8")
         reports.append(report)
     (report_dir / "leaderboard.md").write_text(render_leaderboard(reports), encoding="utf-8")
     print(f"wrote {len(reports)} report(s) + leaderboard -> {report_dir}")
