@@ -4,7 +4,11 @@
 # the implementation plan's reference sheet. Do not add identifiers from
 # memory; add "status: needs-human-verification" instead.
 version: "0.1.0"
-review_status: pending-human-review
+# Reviewed and approved by the maintainer on 2026-07-10. Entries still carrying
+# a [verify] marker cite paywalled clause texts accepted at family level; they
+# remain flagged inline and should be re-checked against the purchased
+# standards before any external audit relies on them.
+review_status: reviewed
 scope: wave1
 frameworks:
   nist_ai_rmf:
