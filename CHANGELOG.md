@@ -10,6 +10,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Standards crosswalk (`standards/crosswalk.yaml`): informative mappings from
   wave-1 taxonomy controls to NIST AI RMF, ISO/IEC 42001, the EU AI Act, and
   sector frameworks, gated behind human review.
+- README: fiduciary-duty framing with the duty-to-dimension table and the
+  "not a finance benchmark" clarification.
 
 ## [0.1.0] — 2026-07-09
 

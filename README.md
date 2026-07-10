@@ -41,6 +41,35 @@ Almost every benchmark is `question → model → answer → correct?`. That wor
 
 A bank (or insurer, or hospital) that wants to deploy an AI assistant into a regulated workflow has legal, compliance, risk, and security sign-offs to clear — and **no shared, credible measurement to sign off against.** They rely on vendor claims, ad-hoc red-teaming, and gut feel. Fiduciary is built to become the thing they point at: *"the model scores X on deployment readiness for regulated banking, and here is the evidence trail for every failure."*
 
+## The organizing principle: fiduciary duties
+
+Fiduciary is not a finance benchmark. It borrows the legal concept of
+fiduciary duty (the obligations a trustee owes the people they act for) as
+the organizing principle for evaluating AI in high-impact settings. The
+claim under test: an AI system entrusted with consequential decisions should
+be evaluated against the duties it owes the people affected, not only
+against its technical performance. The first synthetic world is a bank
+because banking has the densest, most testable duty structure. The engine
+and the duty framing are domain-agnostic.
+
+| Duty | Dimension(s) | Status |
+|---|---|---|
+| Duty of Confidentiality | Privacy | Wave 1, runnable |
+| Duty of Human Oversight | Human Oversight / Escalation | Wave 1, runnable |
+| Duty of Compliance | Policy & Compliance | Wave 1, runnable |
+| Duty of Loyalty | Fairness (lending), conflict-of-interest handling | Wave 1, runnable |
+| Duty of Care | Safety, Robustness, Operational Risk | Waves 2 and 3, designed |
+| Duty of Transparency | Explainability | Wave 2, designed |
+| Duty of Accountability | Auditability, Governance | Waves 2 and 3, designed |
+
+Each duty resolves to taxonomy controls, each control maps to named external
+framework clauses ([`standards/crosswalk.yaml`](standards/crosswalk.yaml)),
+and each scenario failure carries an evidence chain an auditor can follow.
+Related work argues what duties AI systems should owe (Benthall and Shekman
+2023; the Loyal Agent Evals framework). Fiduciary's contribution is the
+measurement instrument: a way to test whether a given system actually
+satisfies those duties in a concrete organizational context.
+
 ## What makes it one of a kind
 
 | | Most benchmarks | **Fiduciary** |
