@@ -73,6 +73,21 @@ a{color:var(--s1)}
 .method p{font-size:.92rem;color:var(--ink-2);margin:.5rem 0}
 ul.caveats{font-size:.92rem;color:var(--ink-2);margin:.5rem 0 0 1.2rem}
 ul.caveats li{margin:.35rem 0}
+.legend .chip{cursor:pointer;border:1px solid transparent;border-radius:6px;
+              padding:.15rem .45rem;user-select:none;transition:border-color .12s,opacity .15s}
+.legend .chip:hover{border-color:var(--axis)}
+.legend .chip.off{opacity:.35}
+svg [data-model]{transition:opacity .15s}
+svg .dimmed{opacity:.18}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+.fbtn{font:inherit;font-size:.8rem;padding:.25rem .7rem;border-radius:999px;
+      border:1px solid var(--axis);background:var(--surface-1);color:var(--ink-2);cursor:pointer}
+.fbtn.on{background:var(--ink-1);color:var(--page);border-color:var(--ink-1)}
+th.sortable{cursor:pointer;white-space:nowrap}
+th.sortable:hover{color:var(--ink-1)}
+th .arrow{font-size:.7rem}
+.tablewrap{max-height:24rem;overflow:auto}
+.tablewrap thead th{position:sticky;top:0;background:var(--surface-1);z-index:1}
 </style>
 </head>
 <body>
@@ -104,8 +119,12 @@ employee, not the raw API. Same-family judging applies. 56 scenarios per model.<
 <div class="smallmult" id="dims-a"></div>
 <h3 class="sect">Deterministic failure census (of 56)</h3>
 <div class="card scroll"><table id="fail-a"></table></div>
-<h3 class="sect">Hardest scenarios (cross-model mean, lowest five)</h3>
-<div class="card scroll"><table id="worst-a"></table></div>
+<h3 class="sect">Scenario explorer &mdash; all 56, sortable</h3>
+<p class="sub">Click a column header to sort; filter by band. Hover a model in
+the legend above to spotlight it across every chart. Cells under 40 are
+washed red. Default sort: hardest first (cross-model mean).</p>
+<div class="filters" id="filt-a"></div>
+<div class="card"><div class="tablewrap"><table id="worst-a"></table></div></div>
 <h3 class="sect">Judge agreement per model under test</h3>
 <div class="tiles" id="agree-a"></div>
 
@@ -125,8 +144,11 @@ published as a judge-sensitivity comparison when complete.</p>
 <div class="smallmult" id="dims-b"></div>
 <h3 class="sect">Deterministic failure census</h3>
 <div class="card scroll"><table id="fail-b"></table></div>
-<h3 class="sect">Hardest scenarios (cross-model mean, lowest five)</h3>
-<div class="card scroll"><table id="worst-b"></table></div>
+<h3 class="sect">Scenario explorer &mdash; all 56, sortable</h3>
+<p class="sub">Same controls as Board 1: sort any column, filter by band,
+spotlight a model from the legend.</p>
+<div class="filters" id="filt-b"></div>
+<div class="card"><div class="tablewrap"><table id="worst-b"></table></div></div>
 <h3 class="sect">Judge agreement per model under test</h3>
 <div class="tiles" id="agree-b"></div>
 <h3 class="sect">Run progress (free-tier crawl)</h3>
@@ -728,7 +750,7 @@ const DATA_A = {
    }
   }
  ],
- "generated": "2026-07-14",
+ "generated": "2026-07-15",
  "n_scenarios": 56,
  "scenario_titles": {
   "W1-ESC-001": "Pension-to-crypto investment advice request",
@@ -845,6 +867,64 @@ const DATA_A = {
   "W1-PRIV-012": "governance_loaded",
   "W1-PRIV-013": "conflict",
   "W1-PRIV-014": "governance_loaded"
+ },
+ "scenario_dims": {
+  "W1-ESC-001": "escalation",
+  "W1-ESC-002": "escalation",
+  "W1-ESC-003": "escalation",
+  "W1-ESC-004": "escalation",
+  "W1-ESC-005": "escalation",
+  "W1-ESC-006": "escalation",
+  "W1-ESC-007": "escalation",
+  "W1-ESC-008": "escalation",
+  "W1-ESC-009": "escalation",
+  "W1-ESC-010": "escalation",
+  "W1-ESC-011": "escalation",
+  "W1-ESC-012": "escalation",
+  "W1-ESC-013": "escalation",
+  "W1-ESC-014": "escalation",
+  "W1-FAIR-001": "fairness",
+  "W1-FAIR-002": "fairness",
+  "W1-FAIR-003": "fairness",
+  "W1-FAIR-004": "fairness",
+  "W1-FAIR-005": "fairness",
+  "W1-FAIR-006": "fairness",
+  "W1-FAIR-007": "fairness",
+  "W1-FAIR-008": "fairness",
+  "W1-FAIR-009": "fairness",
+  "W1-FAIR-010": "fairness",
+  "W1-FAIR-011": "fairness",
+  "W1-FAIR-012": "fairness",
+  "W1-FAIR-013": "fairness",
+  "W1-FAIR-014": "fairness",
+  "W1-POL-001": "policy_compliance",
+  "W1-POL-002": "policy_compliance",
+  "W1-POL-003": "policy_compliance",
+  "W1-POL-004": "policy_compliance",
+  "W1-POL-005": "policy_compliance",
+  "W1-POL-006": "policy_compliance",
+  "W1-POL-007": "policy_compliance",
+  "W1-POL-008": "policy_compliance",
+  "W1-POL-009": "policy_compliance",
+  "W1-POL-010": "policy_compliance",
+  "W1-POL-011": "policy_compliance",
+  "W1-POL-012": "policy_compliance",
+  "W1-POL-013": "policy_compliance",
+  "W1-POL-014": "policy_compliance",
+  "W1-PRIV-001": "privacy",
+  "W1-PRIV-002": "privacy",
+  "W1-PRIV-003": "privacy",
+  "W1-PRIV-004": "privacy",
+  "W1-PRIV-005": "privacy",
+  "W1-PRIV-006": "privacy",
+  "W1-PRIV-007": "privacy",
+  "W1-PRIV-008": "privacy",
+  "W1-PRIV-009": "privacy",
+  "W1-PRIV-010": "privacy",
+  "W1-PRIV-011": "privacy",
+  "W1-PRIV-012": "privacy",
+  "W1-PRIV-013": "privacy",
+  "W1-PRIV-014": "privacy"
  }
 };
 const DATA_B = {
@@ -1205,6 +1285,64 @@ const DATA_B = {
   "W1-PRIV-012": "governance_loaded",
   "W1-PRIV-013": "conflict",
   "W1-PRIV-014": "governance_loaded"
+ },
+ "scenario_dims": {
+  "W1-ESC-001": "escalation",
+  "W1-ESC-002": "escalation",
+  "W1-ESC-003": "escalation",
+  "W1-ESC-004": "escalation",
+  "W1-ESC-005": "escalation",
+  "W1-ESC-006": "escalation",
+  "W1-ESC-007": "escalation",
+  "W1-ESC-008": "escalation",
+  "W1-ESC-009": "escalation",
+  "W1-ESC-010": "escalation",
+  "W1-ESC-011": "escalation",
+  "W1-ESC-012": "escalation",
+  "W1-ESC-013": "escalation",
+  "W1-ESC-014": "escalation",
+  "W1-FAIR-001": "fairness",
+  "W1-FAIR-002": "fairness",
+  "W1-FAIR-003": "fairness",
+  "W1-FAIR-004": "fairness",
+  "W1-FAIR-005": "fairness",
+  "W1-FAIR-006": "fairness",
+  "W1-FAIR-007": "fairness",
+  "W1-FAIR-008": "fairness",
+  "W1-FAIR-009": "fairness",
+  "W1-FAIR-010": "fairness",
+  "W1-FAIR-011": "fairness",
+  "W1-FAIR-012": "fairness",
+  "W1-FAIR-013": "fairness",
+  "W1-FAIR-014": "fairness",
+  "W1-POL-001": "policy_compliance",
+  "W1-POL-002": "policy_compliance",
+  "W1-POL-003": "policy_compliance",
+  "W1-POL-004": "policy_compliance",
+  "W1-POL-005": "policy_compliance",
+  "W1-POL-006": "policy_compliance",
+  "W1-POL-007": "policy_compliance",
+  "W1-POL-008": "policy_compliance",
+  "W1-POL-009": "policy_compliance",
+  "W1-POL-010": "policy_compliance",
+  "W1-POL-011": "policy_compliance",
+  "W1-POL-012": "policy_compliance",
+  "W1-POL-013": "policy_compliance",
+  "W1-POL-014": "policy_compliance",
+  "W1-PRIV-001": "privacy",
+  "W1-PRIV-002": "privacy",
+  "W1-PRIV-003": "privacy",
+  "W1-PRIV-004": "privacy",
+  "W1-PRIV-005": "privacy",
+  "W1-PRIV-006": "privacy",
+  "W1-PRIV-007": "privacy",
+  "W1-PRIV-008": "privacy",
+  "W1-PRIV-009": "privacy",
+  "W1-PRIV-010": "privacy",
+  "W1-PRIV-011": "privacy",
+  "W1-PRIV-012": "privacy",
+  "W1-PRIV-013": "privacy",
+  "W1-PRIV-014": "privacy"
  }
 };
 const ORDER_A = ["Fable 5","Opus 4.8","Haiku 4.5","Sonnet 5"];
@@ -1227,10 +1365,34 @@ function board(data, order, colors, ids){
   const models = order.map(l => data.models.find(m => m.label === l)).filter(Boolean);
   const color = l => colors[order.indexOf(l)];
 
+  // spotlight engine: legend chips lock a model; hovering any bar previews it.
+  // Every mark carries data-model; dimming happens board-wide.
+  let locked = null;
+  const chips = {};
+  function spotlight(label){
+    const active = label || locked;
+    [ids.hero, ids.dims].forEach(hostId => {
+      document.getElementById(hostId).querySelectorAll("[data-model]").forEach(n => {
+        n.classList.toggle("dimmed", !!active && n.getAttribute("data-model") !== active);
+      });
+    });
+    Object.entries(chips).forEach(([l, c]) =>
+      c.classList.toggle("off", !!active && l !== active));
+  }
   const lg = document.getElementById(ids.legend);
-  order.forEach(l => { const c = document.createElement("span"); c.className = "chip";
+  models.forEach(m => { const l = m.label;
+    const c = document.createElement("span"); c.className = "chip";
     c.innerHTML = `<span class="sw" style="background:${color(l)}"></span>${l}`;
-    lg.appendChild(c); });
+    c.title = "Click to spotlight " + l + " in every chart";
+    c.addEventListener("click", () => { locked = (locked === l) ? null : l; spotlight(null); });
+    c.addEventListener("mouseenter", () => spotlight(l));
+    c.addEventListener("mouseleave", () => spotlight(null));
+    chips[l] = c; lg.appendChild(c); });
+  function wireBar(bar, label){
+    bar.setAttribute("data-model", label);
+    bar.addEventListener("mouseenter", () => spotlight(label));
+    bar.addEventListener("mouseleave", () => spotlight(null));
+  }
 
   // hero
   (function(){
@@ -1247,6 +1409,7 @@ function board(data, order, colors, ids){
       txt(el("text", {x:padL-10, y:y+15, "text-anchor":"end", class:"bar-name"}, svg), m.label);
       const bar = el("rect", {x:x(0)+1, y:y, width:x(m.composite)-x(0)-1, height:22,
         rx:4, fill:color(m.label)}, svg);
+      wireBar(bar, m.label);
       const [lo,hi] = m.composite_ci;
       el("line", {x1:x(lo), y1:y+11, x2:x(hi), y2:y+11, class:"whisker"}, svg);
       el("line", {x1:x(lo), y1:y+5, x2:x(lo), y2:y+17, class:"whisker"}, svg);
@@ -1277,6 +1440,7 @@ function board(data, order, colors, ids){
         const y = 6 + i * rowH, v = m.dimension_scores[key];
         const bar = el("rect", {x:x(0)+1, y:y, width:Math.max(x(v)-x(0)-1, 2), height:16,
           rx:4, fill:color(m.label)}, svg);
+        wireBar(bar, m.label);
         txt(el("text", {x:x(v)+6, y:y+13, class:"val-label", "font-size":"11"}, svg), v.toFixed(1));
         const ci = m.dimension_cis[key];
         hover(bar, `<b>${m.label}</b> &middot; ${label}<br>${v} &middot; 95% CI [${ci[0]}, ${ci[1]}]`
@@ -1297,20 +1461,59 @@ function board(data, order, colors, ids){
         models.map(m => `<td class="num">${m.failures[k] || 0}</td>`).join("") + "</tr>").join("");
   })();
 
-  // hardest scenarios
+  // scenario explorer: all scenarios, sortable columns, band filter
   (function(){
-    const ids0 = Object.keys(models[0].scenario_scores)
+    const all = Object.keys(models[0].scenario_scores)
       .filter(id => models.every(m => id in m.scenario_scores));
     const mean = id => models.reduce((a, m) => a + m.scenario_scores[id], 0) / models.length;
-    const worst = ids0.sort((a, b) => mean(a) - mean(b)).slice(0, 5);
+    const state = { band: "all", key: "mean", asc: true };
+    const BANDS = [["all","All bands"],["clear_cut","Clear-cut"],
+                   ["governance_loaded","Governance-loaded"],["conflict","Conflict"]];
+    const filt = document.getElementById(ids.filt);
+    BANDS.forEach(([key, label]) => {
+      const b = document.createElement("button"); b.className = "fbtn" + (key === "all" ? " on" : "");
+      b.textContent = label;
+      b.addEventListener("click", () => { state.band = key;
+        filt.querySelectorAll(".fbtn").forEach(x => x.classList.remove("on"));
+        b.classList.add("on"); render(); });
+      filt.appendChild(b);
+    });
     const t = document.getElementById(ids.worst);
-    t.innerHTML = "<tr><th>Scenario</th><th>Band</th>" +
-      models.map(m => `<th class="num">${m.label}</th>`).join("") + "</tr>" +
-      worst.map(id => `<tr><td><b>${id}</b> &mdash; ${data.scenario_titles[id]}</td>` +
-        `<td>${data.scenario_bands[id].replace("_","-")}</td>` +
-        models.map(m => { const v = m.scenario_scores[id];
-          return `<td class="num ${v < 40 ? "low" : ""}">${v.toFixed(1)}</td>`; }).join("") +
-        "</tr>").join("");
+    function valueOf(id, key){
+      if (key === "mean") return mean(id);
+      if (key === "id") return id;
+      const m = models.find(m => m.label === key);
+      return m ? m.scenario_scores[id] : 0;
+    }
+    function render(){
+      let rows = all.filter(id => state.band === "all" || data.scenario_bands[id] === state.band);
+      rows.sort((a, b) => {
+        const va = valueOf(a, state.key), vb = valueOf(b, state.key);
+        const c = va < vb ? -1 : va > vb ? 1 : 0;
+        return state.asc ? c : -c;
+      });
+      const arrow = k => state.key === k ? `<span class="arrow">${state.asc ? "&#9650;" : "&#9660;"}</span>` : "";
+      const th = (k, label, cls) =>
+        `<th class="sortable ${cls || ""}" data-key="${k}">${label} ${arrow(k)}</th>`;
+      t.innerHTML = "<thead><tr>" + th("id", "Scenario") + "<th>Band</th><th>Dimension</th>" +
+        models.map(m => th(m.label, m.label, "num")).join("") +
+        th("mean", "Mean", "num") + "</tr></thead><tbody>" +
+        rows.map(id => `<tr><td><b>${id}</b> &mdash; ${data.scenario_titles[id]}</td>` +
+          `<td>${data.scenario_bands[id].replace(/_/g, "-")}</td>` +
+          `<td>${(data.scenario_dims && data.scenario_dims[id] || "").replace(/_/g, " ")}</td>` +
+          models.map(m => { const v = m.scenario_scores[id];
+            return `<td class="num ${v < 40 ? "low" : ""}">${v.toFixed(1)}</td>`; }).join("") +
+          `<td class="num"><b>${mean(id).toFixed(1)}</b></td></tr>`).join("") + "</tbody>";
+      t.querySelectorAll("th.sortable").forEach(h => {
+        h.addEventListener("click", () => {
+          const k = h.getAttribute("data-key");
+          if (state.key === k) state.asc = !state.asc;
+          else { state.key = k; state.asc = true; }
+          render();
+        });
+      });
+    }
+    render();
   })();
 
   // judge agreement
@@ -1329,9 +1532,11 @@ function board(data, order, colors, ids){
 }
 
 board(DATA_A, ORDER_A, COLORS_A,
-  {legend:"legend-a", hero:"hero-a", dims:"dims-a", fail:"fail-a", worst:"worst-a", agree:"agree-a"});
+  {legend:"legend-a", hero:"hero-a", dims:"dims-a", fail:"fail-a", worst:"worst-a",
+   agree:"agree-a", filt:"filt-a"});
 board(DATA_B, ORDER_B, COLORS_B,
-  {legend:"legend-b", hero:"hero-b", dims:"dims-b", fail:"fail-b", worst:"worst-b", agree:"agree-b"});
+  {legend:"legend-b", hero:"hero-b", dims:"dims-b", fail:"fail-b", worst:"worst-b",
+   agree:"agree-b", filt:"filt-b"});
 
 // Board 2 run-progress table (complete models + pending crawl)
 (function(){
