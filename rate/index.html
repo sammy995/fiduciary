@@ -3,22 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Fiduciary — Expert Rating Sheet</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
 <style>
+/* Single calm light theme. color-scheme:light keeps browsers and
+   force-dark extensions from inverting it into the broken dark variant. */
 :root{
-  --surface-1:#fcfcfb; --page:#f9f9f7; --raised:#ffffff;
-  --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
-  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
-  --accent:#2a78d6; --good:#0ca30c; --warn:#fab219; --wash:rgba(42,120,214,.10);
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --surface-1:#1a1a19; --page:#0d0d0d; --raised:#232322;
-    --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
-    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
-    --accent:#3987e5; --good:#0ca30c; --warn:#fab219; --wash:rgba(57,135,229,.16);
-  }
+  color-scheme: light;
+  --page:#eceae3; --surface-1:#f5f3ec; --raised:#fbfaf5;
+  --ink-1:#1c1b18; --ink-2:#57554e; --ink-3:#86837a;
+  --grid:#dcd8cd; --axis:#c2bdb0; --ring:rgba(28,27,24,.12);
+  --accent:#2a6fbf; --good:#0c8a0c; --warn:#c98500; --wash:rgba(42,111,191,.09);
 }
 *{box-sizing:border-box;margin:0}
 body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--page);
@@ -39,8 +35,11 @@ h2.serif{font-size:1.3rem;margin:.2rem 0 .5rem}
 .scale-key{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;font-size:.82rem;color:var(--ink-2)}
 .scale-key span{background:var(--raised);border:1px solid var(--ring);border-radius:6px;padding:.2rem .5rem}
 label.f{display:block;font-size:.82rem;color:var(--ink-3);margin:.6rem 0 .2rem}
-input[type=text]{font:inherit;padding:.5rem .6rem;border:1px solid var(--axis);border-radius:8px;
-                 background:var(--raised);color:var(--ink-1);width:100%;max-width:22rem}
+input[type=text],input[type=email]{font:inherit;padding:.5rem .6rem;border:1px solid var(--axis);
+                 border-radius:8px;background:var(--raised);color:var(--ink-1);width:100%;max-width:22rem}
+input.invalid{border-color:#c0392b;background:rgba(192,57,43,.05)}
+input.ok{border-color:var(--good)}
+.field-err{color:#c0392b;font-size:.78rem;min-height:1rem;margin-top:.15rem;max-width:22rem}
 details.policy{margin-top:.5rem;border:1px solid var(--ring);border-radius:8px;background:var(--raised)}
 details.policy>summary{cursor:pointer;padding:.6rem .8rem;font-weight:600;font-size:.9rem}
 details.policy .body{padding:0 .9rem .9rem;white-space:pre-wrap;font-size:.86rem;color:var(--ink-2);
@@ -119,11 +118,17 @@ a{color:var(--accent)}
       download a CSV copy for your records.</li>
     </ul>
     <label class="f" for="rater">Your name</label>
-    <input id="rater" type="text" placeholder="e.g. Alex Kumar" autocomplete="name">
+    <input id="rater" type="text" placeholder="e.g. Alex Kumar" autocomplete="name"
+           maxlength="120" required aria-describedby="err-rater">
+    <div class="field-err" id="err-rater"></div>
     <label class="f" for="email">Your email (so we can confirm your response and follow up)</label>
-    <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+    <input id="email" type="email" placeholder="you@example.com" autocomplete="email"
+           maxlength="200" required aria-describedby="err-email">
+    <div class="field-err" id="err-email"></div>
     <label class="f" for="bg">Your background (optional: compliance / risk / audit / legal / other)</label>
-    <input id="bg" type="text" placeholder="e.g. 8 yrs bank compliance" autocomplete="off">
+    <input id="bg" type="text" placeholder="e.g. 8 yrs bank compliance" autocomplete="off"
+           maxlength="400" aria-describedby="err-bg">
+    <div class="field-err" id="err-bg"></div>
     <input id="company" type="text" tabindex="-1" autocomplete="off"
            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
   </div>
@@ -180,13 +185,44 @@ function flashSaved(){ const n = document.getElementById("savenote");
   n.textContent = "saved"; n.className = "saved";
   clearTimeout(saveTimer); saveTimer = setTimeout(() => n.textContent = "", 1200); }
 
-// rater identity
+// rater identity + field-level validation
 const rater = document.getElementById("rater"), email = document.getElementById("email"),
       bg = document.getElementById("bg"), honey = document.getElementById("company");
 rater.value = store.rater || ""; email.value = store.email || ""; bg.value = store.bg || "";
-rater.addEventListener("input", () => { store.rater = rater.value; save(); refresh(); });
-email.addEventListener("input", () => { store.email = email.value; save(); refresh(); });
-bg.addEventListener("input", () => { store.bg = bg.value; save(); });
+
+function fieldError(el){
+  const v = el.value.trim();
+  if (el === rater){
+    if (!v) return "Please enter your name.";
+    if (v.length > 120) return "Name is too long (120 characters max).";
+  }
+  if (el === email){
+    if (!v) return "Please enter your email.";
+    if (!EMAIL_RE.test(v)) return "That doesn't look like a valid email address.";
+    if (v.length > 200) return "Email is too long (200 characters max).";
+  }
+  if (el === bg && v.length > 400) return "Please keep this under 400 characters.";
+  return "";
+}
+function paint(el, errId, showEmpty){
+  const err = fieldError(el);
+  const box = document.getElementById(errId);
+  // while typing, don't nag about an empty required field; on blur, do.
+  const msg = (!el.value.trim() && !showEmpty) ? "" : err;
+  box.textContent = msg;
+  el.classList.toggle("invalid", !!msg);
+  el.classList.toggle("ok", !err && !!el.value.trim());
+}
+function wire(el, errId, storeKey){
+  el.addEventListener("input", () => { store[storeKey] = el.value; save();
+    paint(el, errId, false); refresh(); });
+  el.addEventListener("blur", () => paint(el, errId, true));
+}
+wire(rater, "err-rater", "rater");
+wire(email, "err-email", "email");
+wire(bg, "err-bg", "bg");
+// reflect any restored values
+paint(rater, "err-rater", false); paint(email, "err-email", false); paint(bg, "err-bg", false);
 
 // policies
 const bandLabel = b => ({clear_cut:"Clear-cut", governance_loaded:"Governance-loaded",
